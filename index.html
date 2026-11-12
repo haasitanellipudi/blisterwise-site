@@ -337,8 +337,8 @@
       <div>
         <form class="pilot" id="pilot" novalidate>
           <div class="row2">
-            <div class="fld"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required><div class="err"></div></div>
-            <div class="fld"><label for="f-pharmacy">Pharmacy name</label><input id="f-pharmacy" name="pharmacy" type="text" autocomplete="organization" required><div class="err"></div></div>
+            <div class="fld"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Jane Smith" required><div class="err"></div></div>
+            <div class="fld"><label for="f-pharmacy">Pharmacy name</label><input id="f-pharmacy" name="pharmacy" type="text" autocomplete="organization" placeholder="e.g. Main Street Pharmacy" required><div class="err"></div></div>
           </div>
           <fieldset class="fld" data-required>
             <legend>Your role</legend>
@@ -351,9 +351,9 @@
           </fieldset>
           <div class="row2">
             <div class="fld"><label for="f-location">City and province</label><input id="f-location" name="location" type="text" placeholder="e.g. Hamilton, ON" required><div class="err"></div></div>
-            <div class="fld"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required><div class="err"></div></div>
+            <div class="fld"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="e.g. jane@yourpharmacy.ca" required><div class="err"></div></div>
           </div>
-          <div class="fld"><label for="f-phone">Phone <span class="opt">(optional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel"><div class="err"></div></div>
+          <div class="fld"><label for="f-phone">Phone <span class="opt">(optional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="e.g. 905-555-0123"><div class="err"></div></div>
           <fieldset class="fld" data-required>
             <legend>Roughly how many compliance-pack patients do you have?</legend>
             <div class="choices">
@@ -378,7 +378,7 @@
               <label><input type="radio" name="software" value="Kroll">Kroll</label>
               <label><input type="radio" name="software" value="Healthwatch">Healthwatch</label>
               <label><input type="radio" name="software" value="Fillware">Fillware</label>
-              <label><input type="radio" name="software" value="Other">Other: <input type="text" name="software_other" aria-label="Other dispensing software"></label>
+              <label><input type="radio" name="software" value="Other">Other: <input type="text" name="software_other" aria-label="Other dispensing software" placeholder="name"></label>
               <label><input type="radio" name="software" value="Not sure">Not sure</label>
             </div><div class="err"></div>
           </fieldset>
@@ -389,7 +389,7 @@
               <label><input type="radio" name="founding" value="Maybe, tell me more">Maybe, tell me more</label>
             </div><div class="err"></div>
           </fieldset>
-          <div class="fld"><label for="f-wishes">Anything you'd want Blisterwise to do? <span class="opt">(optional)</span></label><textarea id="f-wishes" name="wishes" maxlength="1000"></textarea></div>
+          <div class="fld"><label for="f-wishes">Anything you'd want Blisterwise to do? <span class="opt">(optional)</span></label><textarea id="f-wishes" name="wishes" maxlength="1000" placeholder="e.g. Remind us when a patient's billing date is coming up"></textarea></div>
           <div class="trap" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
           <div class="fld" data-required>
             <label class="consent"><input type="checkbox" name="consent" value="Yes"><span>I agree to be contacted by Blisterwise about the pilot. We'll only use your details for this (<a href="privacy.html" target="_blank">privacy</a>).</span></label><div class="err"></div>
