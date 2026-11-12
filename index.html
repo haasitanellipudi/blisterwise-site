@@ -48,25 +48,52 @@
   .btn:focus-visible{outline:3px solid var(--accent); outline-offset:3px}
   .note{color:var(--muted); font-size:14px}
 
-  /* A weekly blister card: 7 days x 4 times, filling up */
+  /* A weekly blister card: days across, times of day down, pills in each pocket */
   .card-art{background:var(--surface); border:1px solid var(--line); border-radius:22px; padding:22px;
             box-shadow:0 20px 50px rgba(19,34,56,.08)}
-  .card-art .head{display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:12px}
-  .card-art .head b{color:var(--ink)}
-  .grid{display:grid; grid-template-columns:auto repeat(7,1fr); gap:7px; align-items:center}
-  .grid span{font-size:11px; color:var(--muted); text-align:center}
-  .grid span.t{text-align:right; padding-right:4px}
-  .p{aspect-ratio:1; border-radius:50%; background:var(--pocket); border:1px solid var(--line); position:relative}
-  .p.f{background:var(--accent-soft); border-color:transparent}
-  .p.f::after{content:""; position:absolute; inset:28%; border-radius:50%; background:var(--accent)}
-  .p.f.h::after{opacity:.45}
+  .card-art .head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:14px}
+  .card-art .head b{font:700 16px var(--f-display)}
+  .card-art .head span{font-size:13px; color:var(--muted)}
+  .grid{display:grid; grid-template-columns:auto repeat(7,1fr); gap:6px; align-items:center}
+  .grid .d{font-size:11px; font-weight:600; color:var(--muted); text-align:center}
+  .grid .t{font-size:11px; color:var(--muted); text-align:right; padding-right:6px; white-space:nowrap}
+  .pk{aspect-ratio:1; border-radius:9px; background:var(--pocket); border:1px solid var(--line);
+      display:flex; flex-wrap:wrap; align-content:center; justify-content:center; gap:2px; padding:3px}
+  .pk i{display:block; width:8px; height:8px; border-radius:50%; border:1px solid rgba(0,0,0,.12)}
+  .pk i.o{width:11px; height:6px; border-radius:4px}
   @media (prefers-reduced-motion: no-preference){
-    .p.f{animation:pop .4s backwards}
-    @keyframes pop{from{transform:scale(.6); opacity:0}}
+    .pk{animation:pop .35s backwards}
+    @keyframes pop{from{transform:scale(.7); opacity:0}}
   }
-  .card-art .foot{display:flex; gap:8px; margin-top:16px; flex-wrap:wrap}
-  .chip{font-size:12px; font-weight:600; padding:4px 10px; border-radius:999px; background:var(--accent-soft); color:var(--accent)}
-  .chip.muted{background:var(--pocket); color:var(--muted)}
+  .steps{display:flex; gap:6px; margin-top:16px; flex-wrap:wrap}
+  .step{font-size:12px; font-weight:600; padding:5px 10px; border-radius:999px; background:var(--accent-soft); color:var(--accent)}
+  .step.now{background:var(--accent); color:var(--accent-ink)}
+  .legend{display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-top:10px}
+
+  /* Patient app */
+  .patient{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center}
+  .patient ul{list-style:none; padding:0; margin:20px 0 0; display:grid; gap:14px}
+  .patient li{display:flex; gap:12px; align-items:flex-start}
+  .patient li b{display:block}
+  .patient li span{color:var(--muted)}
+  .patient .ic{flex:none; width:32px; height:32px; border-radius:9px; background:var(--accent-soft); color:var(--accent);
+               display:grid; place-items:center; font-weight:700}
+  .phone{justify-self:center; width:min(300px,100%); background:#0B1220; border:1px solid var(--line); border-radius:36px; padding:10px;
+         box-shadow:0 24px 60px rgba(19,34,56,.18)}
+  .screen{background:var(--bg); border-radius:28px; padding:18px 14px; display:grid; gap:10px; min-height:520px}
+  .screen .hi{font:700 18px var(--f-display); padding:4px 4px 2px}
+  .tile{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px}
+  .tile small{display:block; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; font-weight:600}
+  .tile.ready{background:var(--accent); color:var(--accent-ink); border-color:transparent}
+  .tile.ready small{color:inherit; opacity:.8}
+  .tile.ready b{display:block; font:700 18px var(--f-display); margin:2px 0}
+  .tile.ready span{font-size:13px; opacity:.9}
+  .med{display:flex; gap:10px; align-items:center; padding-top:8px; font-size:13px}
+  .med i{flex:none; width:12px; height:12px; border-radius:50%; border:1px solid rgba(0,0,0,.15)}
+  .med i.o{width:16px; height:9px; border-radius:5px}
+  .med span{color:var(--muted); display:block; font-size:12px}
+  .msg{font-size:13px}
+  .msg b{display:block; font-size:12px; color:var(--accent); margin-bottom:2px}
 
   section{padding:56px 0; border-top:1px solid var(--line)}
   section h2{font-size:clamp(26px,3.5vw,36px); margin-bottom:28px}
@@ -125,7 +152,7 @@
   footer{padding:32px 0 48px; color:var(--muted); font-size:14px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
 
   @media (max-width:860px){
-    .hero,.offer{grid-template-columns:1fr}
+    .hero,.offer,.patient{grid-template-columns:1fr}
     .hero{gap:36px; padding-top:16px}
     .features{grid-template-columns:1fr}
     .offer{padding:26px}
@@ -146,18 +173,19 @@
       <div>
         <span class="badge">Coming soon</span>
         <h1>Compliance packs, <em>on schedule.</em></h1>
-        <p class="lead">Blisterwise helps Canadian pharmacies keep every blister pack on track: who's due this week, what's been filled, what the pharmacist has checked and what's gone out the door.</p>
+        <p class="lead">Blisterwise helps Canadian pharmacies keep every blister pack on track: who's due this week, what's been filled, what the pharmacist has checked and what's gone out the door. Patients get their own app, too.</p>
         <div class="actions">
           <a class="btn" href="#apply">Apply for the pilot →</a>
           <span class="note">5 founding spots for pharmacies</span>
         </div>
       </div>
 
-      <div class="card-art" aria-hidden="true">
-        <div class="head"><b>Weekly pack</b><span>Due Thursday</span></div>
-        <div class="grid" id="pack"></div>
-        <div class="foot"><span class="chip">Filled</span><span class="chip">Checked</span><span class="chip muted">Ready for pickup</span></div>
-      </div>
+      <figure class="card-art" style="margin:0" aria-label="Example: a weekly blister pack, filled and checked, ready for pickup">
+        <div class="head"><b>Weekly pack</b><span>Week of Nov 16 · 7 pills a day</span></div>
+        <div class="grid" id="pack" aria-hidden="true"></div>
+        <div class="legend" aria-hidden="true"><span>Each pocket holds that dose's pills</span></div>
+        <div class="steps"><span class="step">✓ Filled</span><span class="step">✓ Checked by pharmacist</span><span class="step now">Ready for pickup Thu</span></div>
+      </figure>
     </div>
 
     <section>
@@ -166,6 +194,32 @@
         <div class="feature"><div class="n">01</div><h3>Know who's due</h3><p>One list of every pack coming up, with prep and billing dates worked out for weekly, two-week and monthly patients.</p></div>
         <div class="feature"><div class="n">02</div><h3>Fill and check with confidence</h3><p>Scan each bottle to catch the wrong drug, strength or expiry, then a second person checks it before it leaves.</p></div>
         <div class="feature"><div class="n">03</div><h3>Hand off, roll forward</h3><p>Record pickup or delivery, and the next due date moves forward on its own. Every step is logged.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="patient">
+        <div>
+          <span class="badge">For patients and families</span>
+          <h2>A patient app that explains the pack</h2>
+          <p class="lead" style="margin:16px 0 0">Patients and caregivers see what's coming and what's inside, without calling the pharmacy.</p>
+          <ul>
+            <li><span class="ic">1</span><div><b>When the next pack is ready</b><span>Pickup or delivery day, updated as the pharmacy fills and checks it.</span></div></li>
+            <li><span class="ic">2</span><div><b>What's in each pocket</b><span>Tap a pocket to see each pill, what it looks like and what it's for.</span></div></li>
+            <li><span class="ic">3</span><div><b>Messages from the pharmacy</b><span>Like a dose change or an update on a refill.</span></div></li>
+          </ul>
+        </div>
+        <div class="phone" role="img" aria-label="Example of the patient app on a phone">
+          <div class="screen" aria-hidden="true">
+            <div class="hi">Hi Margaret</div>
+            <div class="tile ready"><small>Your next pack</small><b>Ready for pickup</b><span>Thursday, Nov 19</span></div>
+            <div class="tile"><small>Tonight · Evening pocket</small>
+              <div class="med"><i class="o" style="background:#FFFFFF"></i><div>Metformin 500 mg<span>For blood sugar · white oval</span></div></div>
+              <div class="med"><i style="background:#F4A6B7"></i><div>Atorvastatin 20 mg<span>For cholesterol · pink round</span></div></div>
+            </div>
+            <div class="tile msg"><b>From your pharmacy</b>Your new prescription for amlodipine arrived. Nothing to do: it will be in your next pack.</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -250,7 +304,7 @@
           <div class="fld"><label for="f-wishes">Anything you'd want Blisterwise to do? <span class="opt">(optional)</span></label><textarea id="f-wishes" name="wishes" maxlength="1000"></textarea></div>
           <div class="trap" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
           <div class="fld" data-required>
-            <label class="consent"><input type="checkbox" name="consent" value="Yes">I agree to be contacted by Blisterwise about the pilot. We'll only use your details for this.</label><div class="err"></div>
+            <label class="consent"><input type="checkbox" name="consent" value="Yes">I agree to be contacted by Blisterwise about the pilot. We'll only use your details for this (<a href="privacy.html" target="_blank">privacy</a>).</label><div class="err"></div>
           </div>
           <button class="btn" type="submit">Send application →</button>
           <div class="status" role="status" aria-live="polite"></div>
@@ -266,7 +320,7 @@
   </main>
 
   <footer>
-    <span>© 2026 Blisterwise</span>
+    <span>© 2026 Blisterwise · <a href="privacy.html">Privacy</a></span>
     <span>Questions? <a href="mailto:haasita@blisterwise.ca">haasita@blisterwise.ca</a></span>
   </footer>
 </div>
@@ -307,20 +361,21 @@
     }
   });
 
-  // Draw the blister card: 7 days x 4 times, most pockets filled.
-  const days = ["M","T","W","T","F","S","S"], times = ["AM","Noon","PM","Bed"];
-  const empty = new Set(["1-1","1-3","1-5","3-0","3-2","3-4","3-6"]);
+  // Draw the example pack: the same pills every day, by time of day (made-up example).
+  const W = "#FFFFFF", Y = "#F2C94C", P = "#F4A6B7", B = "#8FB3E8", L = "#BCA9E8";
+  const times = [["Morning", [[W,1],[Y,0],[P,0]]], ["Noon", [[W,1]]], ["Evening", [[W,1],[P,0]]], ["Bedtime", [[L,0]]]];
   const pack = document.getElementById("pack");
-  pack.append(document.createElement("span"));
-  days.forEach(d => { const s = document.createElement("span"); s.textContent = d; pack.append(s); });
-  times.forEach((t, r) => {
-    const s = document.createElement("span"); s.className = "t"; s.textContent = t; pack.append(s);
-    days.forEach((_, c) => {
-      const p = document.createElement("div");
-      p.className = "p" + (empty.has(r + "-" + c) ? "" : " f") + (r === 0 && c === 0 ? " h" : "");
-      p.style.animationDelay = (r * 7 + c) * 25 + "ms";
-      pack.append(p);
-    });
+  const el = (cls, txt) => { const e = document.createElement("div"); e.className = cls; if (txt) e.textContent = txt; return e; };
+  pack.append(el(""));
+  ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].forEach(d => pack.append(el("d", d)));
+  times.forEach(([t, pills], r) => {
+    pack.append(el("t", t));
+    for (let c = 0; c < 7; c++) {
+      const pk = el("pk");
+      pills.forEach(([color, oval]) => { const i = document.createElement("i"); if (oval) i.className = "o"; i.style.background = color; pk.append(i); });
+      pk.style.animationDelay = (c * 4 + r) * 30 + "ms";
+      pack.append(pk);
+    }
   });
 </script>
 </body>
