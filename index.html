@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blisterwise — coming soon</title>
+<meta name="description" content="Blisterwise helps Canadian pharmacies track compliance packs: who's due, what's filled, what's checked and what's gone out. Apply to be one of 5 founding pilot pharmacies.">
+<meta property="og:title" content="Blisterwise — compliance packs, on schedule">
+<meta property="og:description" content="Coming soon for Canadian pharmacies. Apply to be one of 5 founding pilot pharmacies.">
+<meta property="og:image" content="https://blisterwise.ca/apple-touch-icon.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F2F5F9; --surface:#FFFFFF; --ink:#132238; --muted:#5A6678; --line:#D6DEE8;
+    --accent:#1F5FAD; --accent-ink:#FFFFFF; --accent-soft:#DDE8F7; --pocket:#E7ECF3;
+    --f-body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){:root{
+    --bg:#0D1520; --surface:#141F2D; --ink:#E3EAF3; --muted:#93A1B4; --line:#263447;
+    --accent:#6FA8EE; --accent-ink:#0A1422; --accent-soft:#17304F; --pocket:#1B2839; color-scheme:dark}}
+
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 var(--f-body)}
+  a{color:var(--accent)}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px}
+  h1,h2,h3{font-family:var(--f-display); line-height:1.1; margin:0}
+
+  header{padding:22px 0}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); font:700 22px var(--f-display)}
+
+  .hero{display:grid; grid-template-columns:1.15fr .85fr; gap:48px; align-items:center; padding:40px 0 64px}
+  .badge{display:inline-block; background:var(--accent-soft); color:var(--accent); font-weight:600; font-size:13px;
+         letter-spacing:.06em; text-transform:uppercase; padding:5px 12px; border-radius:999px; margin-bottom:18px}
+  .hero h1{font-size:clamp(38px,6vw,64px); letter-spacing:-.02em}
+  .hero h1 em{font-style:normal; color:var(--accent)}
+  .lead{font-size:clamp(17px,2vw,20px); color:var(--muted); max-width:34em; margin:20px 0 28px}
+  .actions{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+  .btn{display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:var(--accent-ink); font-weight:600;
+       text-decoration:none; padding:14px 22px; border-radius:10px; font-size:16px; transition:transform .15s, box-shadow .15s}
+  .btn:hover{transform:translateY(-1px); box-shadow:0 6px 18px rgba(31,95,173,.25)}
+  .btn:focus-visible{outline:3px solid var(--accent); outline-offset:3px}
+  .note{color:var(--muted); font-size:14px}
+
+  /* A weekly blister card: 7 days x 4 times, filling up */
+  .card-art{background:var(--surface); border:1px solid var(--line); border-radius:22px; padding:22px;
+            box-shadow:0 20px 50px rgba(19,34,56,.08)}
+  .card-art .head{display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:12px}
+  .card-art .head b{color:var(--ink)}
+  .grid{display:grid; grid-template-columns:auto repeat(7,1fr); gap:7px; align-items:center}
+  .grid span{font-size:11px; color:var(--muted); text-align:center}
+  .grid span.t{text-align:right; padding-right:4px}
+  .p{aspect-ratio:1; border-radius:50%; background:var(--pocket); border:1px solid var(--line); position:relative}
+  .p.f{background:var(--accent-soft); border-color:transparent}
+  .p.f::after{content:""; position:absolute; inset:28%; border-radius:50%; background:var(--accent)}
+  .p.f.h::after{opacity:.45}
+  @media (prefers-reduced-motion: no-preference){
+    .p.f{animation:pop .4s backwards}
+    @keyframes pop{from{transform:scale(.6); opacity:0}}
+  }
+  .card-art .foot{display:flex; gap:8px; margin-top:16px; flex-wrap:wrap}
+  .chip{font-size:12px; font-weight:600; padding:4px 10px; border-radius:999px; background:var(--accent-soft); color:var(--accent)}
+  .chip.muted{background:var(--pocket); color:var(--muted)}
+
+  section{padding:56px 0; border-top:1px solid var(--line)}
+  section h2{font-size:clamp(26px,3.5vw,36px); margin-bottom:28px}
+  .features{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+  .feature{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:22px}
+  .feature .n{font:700 14px var(--f-display); color:var(--accent); margin-bottom:8px}
+  .feature h3{font-size:20px; margin-bottom:8px}
+  .feature p{margin:0; color:var(--muted)}
+
+  .offer{background:var(--accent); color:var(--accent-ink); border-radius:20px; padding:36px; display:grid;
+         grid-template-columns:1.3fr 1fr; gap:32px; align-items:center}
+  .offer h2{margin-bottom:12px}
+  .offer p{margin:0; opacity:.9}
+  .offer ul{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+  .offer li{background:rgba(255,255,255,.12); border-radius:12px; padding:14px 16px}
+  .offer li b{display:block; font:700 20px var(--f-display)}
+  .offer .btn{background:var(--accent-ink); color:var(--accent); margin-top:22px}
+  .offer small{display:block; margin-top:12px; opacity:.8; font-size:13px}
+
+
+  /* Pilot application form */
+  .apply{display:grid; grid-template-columns:.8fr 1.2fr; gap:40px; align-items:start}
+  .apply .intro p{color:var(--muted); margin:12px 0 0}
+  form.pilot{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:28px; display:grid; gap:18px}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  .fld{display:grid; gap:6px; margin:0; padding:0; border:0; min-width:0}
+  .fld > label, .fld legend{font-weight:600; font-size:14px; padding:0}
+  .fld .opt{font-weight:400; color:var(--muted)}
+  .fld input[type=text], .fld input[type=email], .fld input[type=tel], .fld textarea{
+    font:inherit; color:inherit; background:var(--bg); border:1px solid var(--line); border-radius:10px;
+    padding:11px 12px; width:100%; min-height:46px}
+  .fld textarea{min-height:90px; resize:vertical}
+  .fld input:focus, .fld textarea:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent)}
+  .choices{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px}
+  .choices label{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:999px;
+    padding:8px 14px; cursor:pointer; font-size:14px; background:var(--bg); user-select:none}
+  .choices input{accent-color:var(--accent); margin:0}
+  .choices label:has(input:checked){border-color:var(--accent); background:var(--accent-soft); color:var(--accent); font-weight:600}
+  .choices input[type=text]{border:0; background:transparent; padding:0; min-height:0; width:9em; font:inherit; color:inherit}
+  .choices input[type=text]:focus{outline:none}
+  .consent{display:flex; gap:10px; align-items:flex-start; font-size:14px}
+  .consent input{accent-color:var(--accent); width:18px; height:18px; margin-top:2px; flex:none}
+  .trap{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+  .err{color:#B3261E; font-size:13px; min-height:0}
+  @media (prefers-color-scheme: dark){ .err{color:#F2857C} }
+  .fld.bad input, .fld.bad .choices label{border-color:#B3261E}
+  form.pilot button{border:0; cursor:pointer; justify-self:start; font:inherit; font-weight:600}
+  form.pilot button[disabled]{opacity:.6; cursor:wait}
+  .status{font-size:14px}
+  .thanks{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:36px; text-align:center}
+  .thanks .tick{width:56px; height:56px; border-radius:50%; background:var(--accent-soft); color:var(--accent);
+    display:grid; place-items:center; margin:0 auto 14px; font-size:28px; font-weight:700}
+  .thanks p{color:var(--muted); margin:10px 0 0}
+  @media (max-width:860px){ .apply{grid-template-columns:1fr; gap:24px} .row2{grid-template-columns:1fr} form.pilot{padding:20px} }
+
+  footer{padding:32px 0 48px; color:var(--muted); font-size:14px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+
+  @media (max-width:860px){
+    .hero,.offer{grid-template-columns:1fr}
+    .hero{gap:36px; padding-top:16px}
+    .features{grid-template-columns:1fr}
+    .offer{padding:26px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/" aria-label="Blisterwise home">
+      <svg width="34" height="34" viewBox="0 0 30 30" aria-hidden="true"><rect x="1" y="1" width="28" height="28" rx="7" fill="#1F5FAD"/><g fill="#fff"><circle cx="10" cy="10" r="3.2"/><circle cx="20" cy="10" r="3.2"/><circle cx="10" cy="20" r="3.2"/><circle cx="20" cy="20" r="3.2" opacity=".45"/></g></svg>
+      Blisterwise
+    </a>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <span class="badge">Coming soon</span>
+        <h1>Compliance packs, <em>on schedule.</em></h1>
+        <p class="lead">Blisterwise helps Canadian pharmacies keep every blister pack on track: who's due this week, what's been filled, what the pharmacist has checked and what's gone out the door.</p>
+        <div class="actions">
+          <a class="btn" href="#apply">Apply for the pilot →</a>
+          <span class="note">5 founding spots for pharmacies</span>
+        </div>
+      </div>
+
+      <div class="card-art" aria-hidden="true">
+        <div class="head"><b>Weekly pack</b><span>Due Thursday</span></div>
+        <div class="grid" id="pack"></div>
+        <div class="foot"><span class="chip">Filled</span><span class="chip">Checked</span><span class="chip muted">Ready for pickup</span></div>
+      </div>
+    </div>
+
+    <section>
+      <h2>Built for the pack room</h2>
+      <div class="features">
+        <div class="feature"><div class="n">01</div><h3>Know who's due</h3><p>One list of every pack coming up, with prep and billing dates worked out for weekly, two-week and monthly patients.</p></div>
+        <div class="feature"><div class="n">02</div><h3>Fill and check with confidence</h3><p>Scan each bottle to catch the wrong drug, strength or expiry, then a second person checks it before it leaves.</p></div>
+        <div class="feature"><div class="n">03</div><h3>Hand off, roll forward</h3><p>Record pickup or delivery, and the next due date moves forward on its own. Every step is logged.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="offer">
+        <div>
+          <h2>Become a founding pharmacy</h2>
+          <p>We're looking for 5 Canadian pharmacies to try Blisterwise, tell us what works and help shape it.</p>
+          <a class="btn" href="#apply">Apply for the pilot →</a>
+          <small>Applying is free and doesn't commit you to anything. Please don't include any patient information.</small>
+        </div>
+        <ul>
+          <li><b>12 weeks free</b>Full pilot with setup help</li>
+          <li><b>$149/month for your first year</b>Founding price — regular $299/month</li>
+        </ul>
+      </div>
+      <p class="note" style="margin-top:12px">Prices in Canadian dollars, plus applicable taxes.</p>
+    </section>
+
+    <section id="apply">
+      <div class="apply">
+        <div class="intro">
+          <h2>Apply for the pilot</h2>
+          <p>Tell us a little about your pharmacy. It takes about two minutes, and we'll reply within a few days.</p>
+          <p>Please don't include any patient information.</p>
+        </div>
+
+        <form class="pilot" id="pilot" novalidate>
+          <div class="row2">
+            <div class="fld"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required><div class="err"></div></div>
+            <div class="fld"><label for="f-pharmacy">Pharmacy name</label><input id="f-pharmacy" name="pharmacy" type="text" autocomplete="organization" required><div class="err"></div></div>
+          </div>
+          <fieldset class="fld" data-required>
+            <legend>Your role</legend>
+            <div class="choices">
+              <label><input type="radio" name="role" value="Pharmacist">Pharmacist</label>
+              <label><input type="radio" name="role" value="Pharmacy technician">Pharmacy technician</label>
+              <label><input type="radio" name="role" value="Owner / manager">Owner / manager</label>
+              <label><input type="radio" name="role" value="Other">Other</label>
+            </div><div class="err"></div>
+          </fieldset>
+          <div class="row2">
+            <div class="fld"><label for="f-location">City and province</label><input id="f-location" name="location" type="text" placeholder="e.g. Hamilton, ON" required><div class="err"></div></div>
+            <div class="fld"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required><div class="err"></div></div>
+          </div>
+          <div class="fld"><label for="f-phone">Phone <span class="opt">(optional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel"><div class="err"></div></div>
+          <fieldset class="fld" data-required>
+            <legend>Roughly how many compliance-pack patients do you have?</legend>
+            <div class="choices">
+              <label><input type="radio" name="patients" value="Under 25">Under 25</label>
+              <label><input type="radio" name="patients" value="25 to 100">25 to 100</label>
+              <label><input type="radio" name="patients" value="More than 100">More than 100</label>
+              <label><input type="radio" name="patients" value="Not sure">Not sure</label>
+            </div><div class="err"></div>
+          </fieldset>
+          <fieldset class="fld" data-required>
+            <legend>How do you track packs today? <span class="opt">(pick any)</span></legend>
+            <div class="choices">
+              <label><input type="checkbox" name="tracking" value="Paper or binder">Paper or binder</label>
+              <label><input type="checkbox" name="tracking" value="Spreadsheet">Spreadsheet</label>
+              <label><input type="checkbox" name="tracking" value="Pharmacy software">Pharmacy software</label>
+              <label><input type="checkbox" name="tracking" value="Other">Other</label>
+            </div><div class="err"></div>
+          </fieldset>
+          <fieldset class="fld" data-required>
+            <legend>Which dispensing software do you use?</legend>
+            <div class="choices">
+              <label><input type="radio" name="software" value="Kroll">Kroll</label>
+              <label><input type="radio" name="software" value="Healthwatch">Healthwatch</label>
+              <label><input type="radio" name="software" value="Fillware">Fillware</label>
+              <label><input type="radio" name="software" value="Other">Other: <input type="text" name="software_other" aria-label="Other dispensing software"></label>
+              <label><input type="radio" name="software" value="Not sure">Not sure</label>
+            </div><div class="err"></div>
+          </fieldset>
+          <fieldset class="fld" data-required>
+            <legend>Interested in being one of the 5 founding pilot pharmacies?</legend>
+            <div class="choices">
+              <label><input type="radio" name="founding" value="Yes">Yes</label>
+              <label><input type="radio" name="founding" value="Maybe, tell me more">Maybe, tell me more</label>
+            </div><div class="err"></div>
+          </fieldset>
+          <div class="fld"><label for="f-wishes">Anything you'd want Blisterwise to do? <span class="opt">(optional)</span></label><textarea id="f-wishes" name="wishes" maxlength="1000"></textarea></div>
+          <div class="trap" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+          <div class="fld" data-required>
+            <label class="consent"><input type="checkbox" name="consent" value="Yes">I agree to be contacted by Blisterwise about the pilot. We'll only use your details for this.</label><div class="err"></div>
+          </div>
+          <button class="btn" type="submit">Send application →</button>
+          <div class="status" role="status" aria-live="polite"></div>
+        </form>
+
+        <div class="thanks" id="thanks" hidden tabindex="-1">
+          <div class="tick">✓</div>
+          <h2>Thanks, we've got it!</h2>
+          <p>We'll be in touch within a few days at the email you gave us.<br>Questions in the meantime? <a href="mailto:haasita@blisterwise.ca">haasita@blisterwise.ca</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Blisterwise</span>
+    <span>Questions? <a href="mailto:haasita@blisterwise.ca">haasita@blisterwise.ca</a></span>
+  </footer>
+</div>
+
+<script>
+  // Pilot applications go to a Google Apps Script web app in the Blisterwise account,
+  // which saves them to the "Blisterwise pilot sign-ups" sheet and emails Haasita.
+  const SIGNUP_URL = "https://script.google.com/macros/s/AKfycbzesR98QxyE1LL6ynX94jxdED1zVGiz5G6GWkTP0oeJ2Oyp65STnH4NxiCwgzSGWmIJ/exec";
+  const form = document.getElementById("pilot"), statusEl = form.querySelector(".status");
+  const val = n => [...form.querySelectorAll(`[name="${n}"]`)].filter(i => i.type !== "radio" && i.type !== "checkbox" || i.checked).map(i => i.value.trim()).filter(Boolean);
+  function setErr(fld, msg){ fld.classList.toggle("bad", !!msg); const e = fld.querySelector(".err"); if (e) e.textContent = msg || ""; }
+  form.addEventListener("input", e => { const f = e.target.closest(".fld"); if (f) setErr(f, ""); });
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    let first = null;
+    form.querySelectorAll("input[required], [data-required]").forEach(el => {
+      const fld = el.closest(".fld") || el, input = fld.querySelector("input");
+      const ok = el.matches("input") ? (el.type === "email" ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()) : el.value.trim() !== "") : val(input.name).length > 0;
+      setErr(fld, ok ? "" : (el.type === "email" ? "Please enter a valid email address." : "Please fill this in."));
+      if (!ok && !first) first = fld;
+    });
+    if (first) { first.scrollIntoView({behavior: "smooth", block: "center"}); (first.querySelector("input,textarea")||first).focus({preventScroll:true}); return; }
+    let software = val("software")[0];
+    if (software === "Other" && val("software_other")[0]) software = "Other: " + val("software_other")[0];
+    const data = { name: val("name")[0], pharmacy: val("pharmacy")[0], role: val("role")[0], location: val("location")[0],
+      email: val("email")[0], phone: val("phone")[0] || "", patients: val("patients")[0], tracking: val("tracking").join(", "),
+      software, founding: val("founding")[0], wishes: val("wishes")[0] || "", consent: val("consent")[0], website: val("website")[0] || "" };
+    const btn = form.querySelector("button"); btn.disabled = true; statusEl.textContent = "Sending…";
+    try {
+      if (!SIGNUP_URL) throw new Error("not connected");
+      const res = await fetch(SIGNUP_URL, { method: "POST", body: JSON.stringify(data) });
+      const out = await res.json();
+      if (!out.ok) throw new Error(out.error || "failed");
+      form.hidden = true; const t = document.getElementById("thanks"); t.hidden = false; t.focus();
+    } catch (err) {
+      statusEl.innerHTML = 'Sorry, that didn\'t send. Please try again, or email <a href="mailto:haasita@blisterwise.ca">haasita@blisterwise.ca</a>.';
+      btn.disabled = false;
+    }
+  });
+
+  // Draw the blister card: 7 days x 4 times, most pockets filled.
+  const days = ["M","T","W","T","F","S","S"], times = ["AM","Noon","PM","Bed"];
+  const empty = new Set(["1-1","1-3","1-5","3-0","3-2","3-4","3-6"]);
+  const pack = document.getElementById("pack");
+  pack.append(document.createElement("span"));
+  days.forEach(d => { const s = document.createElement("span"); s.textContent = d; pack.append(s); });
+  times.forEach((t, r) => {
+    const s = document.createElement("span"); s.className = "t"; s.textContent = t; pack.append(s);
+    days.forEach((_, c) => {
+      const p = document.createElement("div");
+      p.className = "p" + (empty.has(r + "-" + c) ? "" : " f") + (r === 0 && c === 0 ? " h" : "");
+      p.style.animationDelay = (r * 7 + c) * 25 + "ms";
+      pack.append(p);
+    });
+  });
+</script>
+</body>
+</html>
