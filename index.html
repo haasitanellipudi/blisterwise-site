@@ -137,6 +137,13 @@
   .offer-cta{margin-top:48px; display:flex; flex-wrap:wrap; gap:24px; align-items:center}
   .fine{font-size:14px; color:var(--muted)}
 
+  .apply-intro{position:sticky; top:32px}
+  .next{list-style:none; padding:0; margin:0 0 28px; counter-reset:n}
+  .next li{counter-increment:n; display:grid; grid-template-columns:44px 1fr; padding:18px 0; border-top:1px solid var(--line)}
+  .next li:last-child{border-bottom:1px solid var(--line)}
+  .next li::before{content:counter(n); font:300 32px/1 var(--f-display); color:var(--accent); grid-row:1 / span 2}
+  .next h3,.next p{grid-column:2}
+  .next p{margin:4px 0 0; color:var(--muted)}
   /* Application form */
   form.pilot{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:32px; display:grid; gap:22px}
   .row2{display:grid; grid-template-columns:1fr 1fr; gap:20px}
@@ -177,6 +184,7 @@
     .features{grid-template-columns:1fr; gap:28px; margin-top:40px}
     .row2{grid-template-columns:1fr}
     form.pilot{padding:22px}
+    .apply-intro{position:static}
   }
   @media (max-width:640px){ nav a:not(.btn){display:none} .figures{grid-template-columns:1fr} }
 </style>
@@ -315,10 +323,15 @@
 
   <section id="apply" hidden>
     <div class="split">
-      <div>
+      <div class="apply-intro">
         <span class="label">Apply</span>
         <h2>Apply for the pilot.</h2>
         <p class="lead">Tell us a little about your pharmacy. It takes about two minutes, and we'll reply within a few days.</p>
+        <ol class="next">
+          <li><h3>We reply within a few days</h3><p>A short email from Haasita, the founder.</p></li>
+          <li><h3>A 20-minute call</h3><p>We walk through how your pharmacy handles packs today and show you Blisterwise.</p></li>
+          <li><h3>Choosing the founding 5</h3><p>If it's a fit, we set you up for the free 12-week pilot.</p></li>
+        </ol>
         <p class="fine">Please don't include any patient information.</p>
       </div>
       <div>
