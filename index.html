@@ -19,241 +19,309 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@200;300;400&family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#F2F5F9; --surface:#FFFFFF; --ink:#132238; --muted:#5A6678; --line:#D6DEE8;
-    --accent:#1F5FAD; --accent-ink:#FFFFFF; --accent-soft:#DDE8F7; --pocket:#E7ECF3;
-    --f-body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-    --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+    --bg:#F7F7F5; --surface:#FFFFFF; --ink:#18181A; --muted:#66666D; --line:#E2E2DE;
+    --accent:#1F5FAD; --soft:#EDF2F9; --pocket:#F1F1EF; --err:#B3261E;
+    --f-body:"Albert Sans", "Avenir Next", "Helvetica Neue", Arial, system-ui, sans-serif;
+    --f-display:"Alumni Sans", "Avenir Next Condensed", "Arial Narrow", sans-serif;
   }
   @media (prefers-color-scheme: dark){:root{
-    --bg:#0D1520; --surface:#141F2D; --ink:#E3EAF3; --muted:#93A1B4; --line:#263447;
-    --accent:#6FA8EE; --accent-ink:#0A1422; --accent-soft:#17304F; --pocket:#1B2839; color-scheme:dark}}
+    --bg:#111113; --surface:#18181B; --ink:#EDEDEF; --muted:#9C9CA4; --line:#2B2B30;
+    --accent:#82B2F2; --soft:#1A2433; --pocket:#212125; --err:#F2857C; color-scheme:dark}}
 
   *{box-sizing:border-box}
   [hidden]{display:none!important}
-  html{-webkit-text-size-adjust:100%}
-  body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 var(--f-body)}
-  a{color:var(--accent)}
-  .wrap{max-width:1080px; margin:0 auto; padding:0 20px}
-  h1,h2,h3{font-family:var(--f-display); line-height:1.1; margin:0}
+  html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+  body{margin:0; background:var(--bg); color:var(--ink); font:17px/1.6 var(--f-body); -webkit-font-smoothing:antialiased}
+  a{color:inherit; text-underline-offset:3px}
+  .wrap{max-width:1140px; margin:0 auto; padding:0 24px}
+  h1,h2{font-family:var(--f-display); font-weight:200; line-height:.95; letter-spacing:-.005em; margin:0}
+  h3{font-size:18px; font-weight:600; margin:0}
+  .label{display:block; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:22px}
+  .muted{color:var(--muted)}
 
-  header{padding:22px 0}
-  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); font:700 22px var(--f-display)}
+  /* Header */
+  header{border-bottom:1px solid var(--line)}
+  header .wrap{display:flex; align-items:center; justify-content:space-between; gap:20px; height:68px}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:600; font-size:18px; letter-spacing:.02em}
+  nav{display:flex; align-items:center; gap:28px; font-size:15px}
+  nav a{text-decoration:none; color:var(--muted)} nav a:hover{color:var(--ink)}
 
-  .hero{display:grid; grid-template-columns:1.15fr .85fr; gap:48px; align-items:center; padding:40px 0 64px}
-  .badge{display:inline-block; background:var(--accent-soft); color:var(--accent); font-weight:600; font-size:13px;
-         letter-spacing:.06em; text-transform:uppercase; padding:5px 12px; border-radius:999px; margin-bottom:18px}
-  .hero h1{font-size:clamp(38px,6vw,64px); letter-spacing:-.02em}
+  /* Buttons */
+  .btn{display:inline-flex; align-items:center; gap:10px; background:var(--ink); color:var(--bg); font:500 16px var(--f-body);
+       text-decoration:none; padding:14px 22px; border-radius:8px; border:0; cursor:pointer; transition:opacity .15s}
+  .btn:hover{opacity:.86}
+  .btn:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+  .btn .arr{color:var(--accent)}
+  @media (prefers-color-scheme: dark){ .btn .arr{color:#1F5FAD} }
+  .btn.small{padding:9px 16px; font-size:14px}
+  nav .btn{color:var(--bg)}
+
+  /* Hero */
+  .hero{display:grid; grid-template-columns:1.12fr .88fr; gap:64px; align-items:center; padding:72px 0 72px}
+  .hero h1{font-size:clamp(60px,7.4vw,112px)}
+  .hero h1 em{white-space:nowrap}
   .hero h1 em{font-style:normal; color:var(--accent)}
-  .lead{font-size:clamp(17px,2vw,20px); color:var(--muted); max-width:34em; margin:20px 0 28px}
-  .actions{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
-  .btn{display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:var(--accent-ink); font-weight:600;
-       text-decoration:none; padding:14px 22px; border-radius:10px; font-size:16px; transition:transform .15s, box-shadow .15s}
-  .btn:hover{transform:translateY(-1px); box-shadow:0 6px 18px rgba(31,95,173,.25)}
-  .btn:focus-visible{outline:3px solid var(--accent); outline-offset:3px}
-  .note{color:var(--muted); font-size:14px}
+  .lead{font-size:clamp(18px,1.6vw,20px); color:var(--muted); max-width:31em; margin:28px 0 36px}
+  .actions{display:flex; flex-wrap:wrap; gap:24px; align-items:center}
+  .actions .note{font-size:15px; color:var(--muted)}
 
-  /* A weekly blister card: days across, times of day down, pills in each pocket */
-  .card-art{background:var(--surface); border:1px solid var(--line); border-radius:22px; padding:22px;
-            box-shadow:0 20px 50px rgba(19,34,56,.08)}
-  .card-art .head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:14px}
-  .card-art .head b{font:700 16px var(--f-display)}
-  .card-art .head span{font-size:13px; color:var(--muted)}
+  /* Weekly pack picture */
+  .pack{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px; margin:0}
+  .pack .head{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:4px 12px; margin-bottom:18px; font-size:14px}
+  .pack .head b{font-weight:600} .pack .head span{color:var(--muted)}
   .grid{display:grid; grid-template-columns:auto repeat(7,1fr); gap:6px; align-items:center}
-  .grid .d{font-size:11px; font-weight:600; color:var(--muted); text-align:center}
-  .grid .t{font-size:11px; color:var(--muted); text-align:right; padding-right:6px; white-space:nowrap}
-  .pk{aspect-ratio:1; border-radius:9px; background:var(--pocket); border:1px solid var(--line);
+  .grid .d{font-size:11px; font-weight:600; color:var(--muted); text-align:center; letter-spacing:.04em}
+  .grid .t{font-size:11px; color:var(--muted); text-align:right; padding-right:8px; white-space:nowrap}
+  .pk{aspect-ratio:1; border-radius:6px; background:var(--pocket); border:1px solid var(--line);
       display:flex; flex-wrap:wrap; align-content:center; justify-content:center; gap:2px; padding:3px}
-  .pk i{display:block; width:8px; height:8px; border-radius:50%; border:1px solid rgba(0,0,0,.12)}
+  .pk i{display:block; width:8px; height:8px; border-radius:50%; border:1px solid rgba(0,0,0,.14)}
   .pk i.o{width:11px; height:6px; border-radius:4px}
-  @media (prefers-reduced-motion: no-preference){
-    .pk{animation:pop .35s backwards}
-    @keyframes pop{from{transform:scale(.7); opacity:0}}
-  }
-  .steps{display:flex; gap:6px; margin-top:16px; flex-wrap:wrap}
-  .step{font-size:12px; font-weight:600; padding:5px 10px; border-radius:999px; background:var(--accent-soft); color:var(--accent)}
-  .step.now{background:var(--accent); color:var(--accent-ink)}
-  .legend{display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-top:10px}
+  @media (prefers-reduced-motion: no-preference){ .pk{animation:pop .35s backwards} @keyframes pop{from{transform:scale(.75); opacity:0}} }
+  .progress{display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:20px; padding-top:16px; border-top:1px solid var(--line); font-size:13px; color:var(--muted)}
+  .progress b{color:var(--accent); font-weight:600}
+
+  /* Sections */
+  section{padding:80px 0; border-top:1px solid var(--line)}
+  section h2{font-size:clamp(48px,6.4vw,84px)}
+  .split{display:grid; grid-template-columns:.9fr 1.1fr; gap:64px; align-items:start}
+
+  .features{display:grid; grid-template-columns:repeat(3,1fr); gap:40px; margin-top:48px}
+  .features div{border-top:1px solid var(--ink); padding-top:20px}
+  .features p{margin:10px 0 0; color:var(--muted)}
 
   /* Patient app */
-  .patient{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center}
-  .patient ul{list-style:none; padding:0; margin:20px 0 0; display:grid; gap:14px}
-  .patient li{display:flex; gap:12px; align-items:flex-start}
-  .patient li b{display:block}
-  .patient li span{color:var(--muted)}
-  .patient .ic{flex:none; width:32px; height:32px; border-radius:9px; background:var(--accent-soft); color:var(--accent);
-               display:grid; place-items:center; font-weight:700}
-  .phone{justify-self:center; width:min(300px,100%); background:#0B1220; border:1px solid var(--line); border-radius:36px; padding:10px;
-         box-shadow:0 24px 60px rgba(19,34,56,.18)}
-  .screen{background:var(--bg); border-radius:28px; padding:18px 14px; display:grid; gap:10px; min-height:520px}
-  .screen .hi{font:700 18px var(--f-display); padding:4px 4px 2px}
-  .tile{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px}
-  .tile small{display:block; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; font-weight:600}
-  .tile.ready{background:var(--accent); color:var(--accent-ink); border-color:transparent}
+  .points{list-style:none; padding:0; margin:40px 0 0}
+  .points li{padding:18px 0; border-top:1px solid var(--line)}
+  .points li:last-child{border-bottom:1px solid var(--line)}
+  .points p{margin:4px 0 0; color:var(--muted)}
+  .phone-wrap{justify-self:center; width:min(300px,100%)}
+  .phone{ width:min(300px,100%); background:#0E0E10; border-radius:38px; padding:10px; border:1px solid var(--line)}
+  .screen{background:var(--bg); border-radius:30px; padding:22px 14px 0; height:560px; display:flex; flex-direction:column; overflow:hidden}
+  .viewport{flex:1; overflow-y:auto; position:relative; scrollbar-width:none; overscroll-behavior-y:auto;
+            -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 40px), transparent 100%);
+                    mask-image:linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 40px), transparent 100%)}
+  .viewport::-webkit-scrollbar{display:none}
+  .viewport:focus-visible{outline:2px solid var(--accent); outline-offset:-2px}
+  .feed{display:grid; gap:10px; padding:10px 0 0}
+  .feed:last-child{padding-bottom:40px}
+  .scrollhint{text-align:center; font-size:13px; color:var(--muted); margin-top:12px}
+  .mini{display:grid; grid-template-columns:repeat(7,1fr); gap:5px; margin-top:8px; text-align:center}
+  .mini span{font-size:10px; color:var(--muted); font-weight:600}
+  .mini span.today{color:var(--accent)}
+  .mini i{aspect-ratio:1; border-radius:5px; background:var(--pocket); border:1px solid var(--line)}
+  .mini i.done{background:var(--line)}
+  .mini i.now{border:2px solid var(--accent); background:var(--soft)}
+  .minicap{font-size:12px; color:var(--muted); margin-top:8px}
+  .screen .hi{font:300 30px var(--f-display); padding:0 4px 4px}
+  .tile{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px; font-size:13px}
+  .tile small{display:block; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.12em; font-weight:600; margin-bottom:2px}
+  .tile.ready{background:var(--accent); color:#fff; border-color:transparent}
   .tile.ready small{color:inherit; opacity:.8}
-  .tile.ready b{display:block; font:700 18px var(--f-display); margin:2px 0}
-  .tile.ready span{font-size:13px; opacity:.9}
-  .med{display:flex; gap:10px; align-items:center; padding-top:8px; font-size:13px}
+  .tile.ready b{display:block; font:400 28px/1 var(--f-display); margin:4px 0}
+  .med{display:flex; gap:10px; align-items:center; padding-top:8px}
   .med i{flex:none; width:12px; height:12px; border-radius:50%; border:1px solid rgba(0,0,0,.15)}
   .med i.o{width:16px; height:9px; border-radius:5px}
+  .med i:not(.o){margin:0 2px}
   .med span{color:var(--muted); display:block; font-size:12px}
-  .msg{font-size:13px}
   .msg b{display:block; font-size:12px; color:var(--accent); margin-bottom:2px}
 
-  section{padding:56px 0; border-top:1px solid var(--line)}
-  section h2{font-size:clamp(26px,3.5vw,36px); margin-bottom:28px}
-  .features{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
-  .feature{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:22px}
-  .feature .n{font:700 14px var(--f-display); color:var(--accent); margin-bottom:8px}
-  .feature h3{font-size:20px; margin-bottom:8px}
-  .feature p{margin:0; color:var(--muted)}
+  /* Founding offer */
+  .figures{display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:8px}
+  .figures div{border-top:1px solid var(--ink); padding-top:20px}
+  .figures .big{display:block; font:200 clamp(56px,6vw,84px)/.9 var(--f-display); white-space:nowrap}
+  .figures .big em{font-style:normal; color:var(--accent)}
+  .figures p{margin:12px 0 0; color:var(--muted)}
+  .offer-cta{margin-top:48px; display:flex; flex-wrap:wrap; gap:24px; align-items:center}
+  .fine{font-size:14px; color:var(--muted)}
 
-  .offer{background:var(--accent); color:var(--accent-ink); border-radius:20px; padding:36px; display:grid;
-         grid-template-columns:1.3fr 1fr; gap:32px; align-items:center}
-  .offer h2{margin-bottom:12px}
-  .offer p{margin:0; opacity:.9}
-  .offer ul{list-style:none; margin:0; padding:0; display:grid; gap:12px}
-  .offer li{background:rgba(255,255,255,.12); border-radius:12px; padding:14px 16px}
-  .offer li b{display:block; font:700 20px var(--f-display)}
-  .offer .btn{background:var(--accent-ink); color:var(--accent); margin-top:22px}
-  .offer small{display:block; margin-top:12px; opacity:.8; font-size:13px}
-
-
-  /* Pilot application form */
-  .apply{display:grid; grid-template-columns:.8fr 1.2fr; gap:40px; align-items:start}
-  .apply .intro p{color:var(--muted); margin:12px 0 0}
-  form.pilot{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:28px; display:grid; gap:18px}
-  .row2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
-  .fld{display:grid; gap:6px; margin:0; padding:0; border:0; min-width:0}
-  .fld > label, .fld legend{font-weight:600; font-size:14px; padding:0}
-  .fld .opt{font-weight:400; color:var(--muted)}
+  /* Application form */
+  form.pilot{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:32px; display:grid; gap:22px}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:20px}
+  .fld{display:grid; gap:8px; margin:0; padding:0; border:0; min-width:0}
+  .fld > label, .fld legend{font-weight:500; font-size:15px; padding:0}
+  .opt{font-weight:400; color:var(--muted)}
   .fld input[type=text], .fld input[type=email], .fld input[type=tel], .fld textarea{
-    font:inherit; color:inherit; background:var(--bg); border:1px solid var(--line); border-radius:10px;
+    font:inherit; font-size:16px; color:inherit; background:var(--bg); border:1px solid var(--line); border-radius:6px;
     padding:11px 12px; width:100%; min-height:46px}
-  .fld textarea{min-height:90px; resize:vertical}
-  .fld input:focus, .fld textarea:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent)}
-  .choices{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px}
-  .choices label{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:999px;
-    padding:8px 14px; cursor:pointer; font-size:14px; background:var(--bg); user-select:none}
+  .fld textarea{min-height:96px; resize:vertical}
+  .fld input:focus, .fld textarea:focus{outline:2px solid var(--accent); outline-offset:0; border-color:transparent}
+  .choices{display:flex; flex-wrap:wrap; gap:8px; margin-top:2px}
+  .choices label{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:6px;
+    padding:9px 14px; cursor:pointer; font-size:15px; background:var(--bg); user-select:none}
   .choices input{accent-color:var(--accent); margin:0}
-  .choices label:has(input:checked){border-color:var(--accent); background:var(--accent-soft); color:var(--accent); font-weight:600}
+  .choices label:has(input:checked){border-color:var(--accent); background:var(--soft)}
   .choices input[type=text]{border:0; background:transparent; padding:0; min-height:0; width:9em; font:inherit; color:inherit}
   .choices input[type=text]:focus{outline:none}
-  .consent{display:flex; gap:10px; align-items:flex-start; font-size:14px}
-  .consent input{accent-color:var(--accent); width:18px; height:18px; margin-top:2px; flex:none}
+  .consent{display:flex; gap:10px; align-items:flex-start; font-size:15px; font-weight:400!important}
+  .consent input{accent-color:var(--accent); width:18px; height:18px; margin-top:3px; flex:none}
   .trap{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
-  .err{color:#B3261E; font-size:13px; min-height:0}
-  @media (prefers-color-scheme: dark){ .err{color:#F2857C} }
-  .fld.bad input, .fld.bad .choices label{border-color:#B3261E}
-  form.pilot button{border:0; cursor:pointer; justify-self:start; font:inherit; font-weight:600}
-  form.pilot button[disabled]{opacity:.6; cursor:wait}
+  .err{color:var(--err); font-size:13px}
+  .fld.bad input, .fld.bad .choices label{border-color:var(--err)}
+  form.pilot .btn{justify-self:start}
+  form.pilot .btn[disabled]{opacity:.5; cursor:wait}
   .status{font-size:14px}
-  .thanks{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:36px; text-align:center}
-  .thanks .tick{width:56px; height:56px; border-radius:50%; background:var(--accent-soft); color:var(--accent);
-    display:grid; place-items:center; margin:0 auto 14px; font-size:28px; font-weight:700}
-  .thanks p{color:var(--muted); margin:10px 0 0}
-  @media (max-width:860px){ .apply{grid-template-columns:1fr; gap:24px} .row2{grid-template-columns:1fr} form.pilot{padding:20px} }
+  .thanks{border-top:1px solid var(--ink); padding-top:28px}
+  .thanks h2{font-size:clamp(44px,5vw,64px)}
+  .thanks p{color:var(--muted); margin:16px 0 0}
 
-  footer{padding:32px 0 48px; color:var(--muted); font-size:14px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+  footer{border-top:1px solid var(--line)}
+  footer .wrap{padding-top:28px; padding-bottom:48px; color:var(--muted); font-size:14px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
 
-  @media (max-width:860px){
-    .hero,.offer,.patient{grid-template-columns:1fr}
-    .hero{gap:36px; padding-top:16px}
-    .features{grid-template-columns:1fr}
-    .offer{padding:26px}
+  @media (max-width:900px){
+    .hero,.split{grid-template-columns:1fr; gap:48px}
+    .hero{padding:36px 0 48px; gap:36px}
+    section{padding:56px 0}
+    .features{grid-template-columns:1fr; gap:28px; margin-top:40px}
+    .row2{grid-template-columns:1fr}
+    form.pilot{padding:22px}
   }
+  @media (max-width:640px){ nav a:not(.btn){display:none} .figures{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
+<header>
+  <div class="wrap">
     <a class="brand" href="/" aria-label="Blisterwise home">
-      <svg width="34" height="34" viewBox="0 0 30 30" aria-hidden="true"><rect x="1" y="1" width="28" height="28" rx="7" fill="#1F5FAD"/><g fill="#fff"><circle cx="10" cy="10" r="3.2"/><circle cx="20" cy="10" r="3.2"/><circle cx="10" cy="20" r="3.2"/><circle cx="20" cy="20" r="3.2" opacity=".45"/></g></svg>
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="1" y="1" width="28" height="28" rx="7" fill="#1F5FAD"/><g fill="#fff"><circle cx="10" cy="10" r="3.2"/><circle cx="20" cy="10" r="3.2"/><circle cx="10" cy="20" r="3.2"/><circle cx="20" cy="20" r="3.2" opacity=".45"/></g></svg>
       Blisterwise
     </a>
-  </header>
+    <nav aria-label="Main">
+      <a href="#pharmacies">For pharmacies</a>
+      <a href="#patients">For patients</a>
+      <a href="#pilot-offer">Pilot</a>
+      <a class="btn small" href="#apply">Apply</a>
+    </nav>
+  </div>
+</header>
 
-  <main>
-    <div class="hero">
-      <div>
-        <span class="badge">Coming soon</span>
-        <h1>Compliance packs, <em>on schedule.</em></h1>
-        <p class="lead">Blisterwise helps Canadian pharmacies keep every blister pack on track: who's due this week, what's been filled, what the pharmacist has checked and what's gone out the door. Patients get their own app, too.</p>
-        <div class="actions">
-          <a class="btn" href="#apply">Apply for the pilot →</a>
-          <span class="note">5 founding spots for pharmacies</span>
-        </div>
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <span class="label">Coming soon · For Canadian pharmacies</span>
+      <h1>Compliance packs, <em>on schedule.</em></h1>
+      <p class="lead">Blisterwise keeps every blister pack on track: who's due this week, what's been filled, what the pharmacist has checked and what's gone out the door. Patients get their own app, too.</p>
+      <div class="actions">
+        <a class="btn" href="#apply">Apply for the pilot <span class="arr">→</span></a>
+        <span class="note">5 founding spots</span>
       </div>
-
-      <figure class="card-art" style="margin:0" aria-label="Example: a weekly blister pack, filled and checked, ready for pickup">
-        <div class="head"><b>Weekly pack</b><span>Week of Nov 16 · 7 pills a day</span></div>
-        <div class="grid" id="pack" aria-hidden="true"></div>
-        <div class="legend" aria-hidden="true"><span>Each pocket holds that dose's pills</span></div>
-        <div class="steps"><span class="step">✓ Filled</span><span class="step">✓ Checked by pharmacist</span><span class="step now">Ready for pickup Thu</span></div>
-      </figure>
     </div>
 
-    <section>
-      <h2>Built for the pack room</h2>
-      <div class="features">
-        <div class="feature"><div class="n">01</div><h3>Know who's due</h3><p>One list of every pack coming up, with prep and billing dates worked out for weekly, two-week and monthly patients.</p></div>
-        <div class="feature"><div class="n">02</div><h3>Fill and check with confidence</h3><p>Scan each bottle to catch the wrong drug, strength or expiry, then a second person checks it before it leaves.</p></div>
-        <div class="feature"><div class="n">03</div><h3>Hand off, roll forward</h3><p>Record pickup or delivery, and the next due date moves forward on its own. Every step is logged.</p></div>
-      </div>
-    </section>
+    <figure class="pack" aria-label="Example: a weekly blister pack, filled and checked, ready for pickup">
+      <div class="head"><b>Weekly pack</b><span>Week of Nov 16 · 7 pills a day</span></div>
+      <div class="grid" id="pack" aria-hidden="true"></div>
+      <div class="progress"><span>✓ Filled</span><span>✓ Checked by pharmacist</span><b>Ready for pickup Thursday</b></div>
+    </figure>
+  </div>
 
-    <section>
-      <div class="patient">
-        <div>
-          <span class="badge">For patients and families</span>
-          <h2>A patient app that explains the pack</h2>
-          <p class="lead" style="margin:16px 0 0">Patients and caregivers see what's coming and what's inside, without calling the pharmacy.</p>
-          <ul>
-            <li><span class="ic">1</span><div><b>When the next pack is ready</b><span>Pickup or delivery day, updated as the pharmacy fills and checks it.</span></div></li>
-            <li><span class="ic">2</span><div><b>What's in each pocket</b><span>Tap a pocket to see each pill, what it looks like and what it's for.</span></div></li>
-            <li><span class="ic">3</span><div><b>Messages from the pharmacy</b><span>Like a dose change or an update on a refill.</span></div></li>
-          </ul>
-        </div>
-        <div class="phone" role="img" aria-label="Example of the patient app on a phone">
-          <div class="screen" aria-hidden="true">
-            <div class="hi">Hi Margaret</div>
-            <div class="tile ready"><small>Your next pack</small><b>Ready for pickup</b><span>Thursday, Nov 19</span></div>
-            <div class="tile"><small>Tonight · Evening pocket</small>
-              <div class="med"><i class="o" style="background:#FFFFFF"></i><div>Metformin 500 mg<span>For blood sugar · white oval</span></div></div>
-              <div class="med"><i style="background:#F4A6B7"></i><div>Atorvastatin 20 mg<span>For cholesterol · pink round</span></div></div>
+  <section id="pharmacies">
+    <span class="label">For pharmacies</span>
+    <h2>Built for the pack room.</h2>
+    <div class="features">
+      <div><h3>Know who's due</h3><p>One list of every pack coming up, with prep and billing dates worked out for weekly, two-week and monthly patients.</p></div>
+      <div><h3>Fill and check with confidence</h3><p>Scan each bottle to catch the wrong drug, strength or expiry. A second person checks it before it leaves.</p></div>
+      <div><h3>Hand off, roll forward</h3><p>Record pickup or delivery, and the next due date moves forward on its own. Every step is logged.</p></div>
+    </div>
+  </section>
+
+  <section id="patients">
+    <div class="split">
+      <div>
+        <span class="label">For patients and families</span>
+        <h2>An app that explains the pack.</h2>
+        <p class="lead" style="margin-bottom:0">Patients and caregivers see what's coming and what's inside, without calling the pharmacy.</p>
+        <ul class="points">
+          <li><h3>When the next pack is ready</h3><p>Pickup or delivery day, updated as the pharmacy fills and checks it.</p></li>
+          <li><h3>What's in each pocket</h3><p>Tap a pocket to see each pill, what it looks like and what it's for.</p></li>
+          <li><h3>Messages from the pharmacy</h3><p>Like a dose change or an update on a refill.</p></li>
+        </ul>
+      </div>
+      <div class="phone-wrap"><div class="phone">
+        <div class="screen">
+          <div class="hi">Hi Margaret</div>
+          <div class="viewport" tabindex="0" aria-label="Example patient app screens. Scroll to explore.">
+            <div class="feed">
+          <div class="tile ready"><small>Your next pack</small><b>Ready for pickup</b>Thursday, Nov 19</div>
+          <div class="tile"><small>This week</small>
+            <div class="mini">
+              <span>M</span><span>T</span><span>W</span><span class="today">T</span><span>F</span><span>S</span><span>S</span>
+              <i class="done"></i><i class="done"></i><i class="done"></i><i class="now"></i><i></i><i></i><i></i>
             </div>
-            <div class="tile msg"><b>From your pharmacy</b>Your new prescription for amlodipine arrived. Nothing to do: it will be in your next pack.</div>
+            <div class="minicap">Thursday · evening pocket next</div>
+          </div>
+          <div class="tile"><small>Tonight · Evening pocket</small>
+            <div class="med"><i class="o" style="background:#FFFFFF"></i><div>Metformin 500 mg<span>For blood sugar · white oval</span></div></div>
+            <div class="med"><i style="background:#F4A6B7"></i><div>Atorvastatin 20 mg<span>For cholesterol · pink round</span></div></div>
+          </div>
+          <div class="tile msg"><b>From your pharmacy</b>Your new prescription for amlodipine arrived. Nothing to do: it will be in your next pack.</div>
+          <div class="tile"><small>Your medications</small>
+            <div class="med"><i style="background:#F2C94C"></i><div>Amlodipine 5 mg<span>For blood pressure · morning</span></div></div>
+            <div class="med"><i class="o" style="background:#FFFFFF"></i><div>Metformin 500 mg<span>For blood sugar · morning, noon, evening</span></div></div>
+            <div class="med"><i style="background:#F4A6B7"></i><div>Atorvastatin 20 mg<span>For cholesterol · evening</span></div></div>
+            <div class="med"><i style="background:#BCA9E8"></i><div>Melatonin 3 mg<span>For sleep · bedtime</span></div></div>
+          </div>
+          <div class="tile"><small>Delivery or pickup</small>Pickup at your pharmacy. Ask them to switch you to delivery any time.</div>
+            </div>
+            <div class="feed" aria-hidden="true">
+          <div class="tile ready"><small>Your next pack</small><b>Ready for pickup</b>Thursday, Nov 19</div>
+          <div class="tile"><small>This week</small>
+            <div class="mini">
+              <span>M</span><span>T</span><span>W</span><span class="today">T</span><span>F</span><span>S</span><span>S</span>
+              <i class="done"></i><i class="done"></i><i class="done"></i><i class="now"></i><i></i><i></i><i></i>
+            </div>
+            <div class="minicap">Thursday · evening pocket next</div>
+          </div>
+          <div class="tile"><small>Tonight · Evening pocket</small>
+            <div class="med"><i class="o" style="background:#FFFFFF"></i><div>Metformin 500 mg<span>For blood sugar · white oval</span></div></div>
+            <div class="med"><i style="background:#F4A6B7"></i><div>Atorvastatin 20 mg<span>For cholesterol · pink round</span></div></div>
+          </div>
+          <div class="tile msg"><b>From your pharmacy</b>Your new prescription for amlodipine arrived. Nothing to do: it will be in your next pack.</div>
+          <div class="tile"><small>Your medications</small>
+            <div class="med"><i style="background:#F2C94C"></i><div>Amlodipine 5 mg<span>For blood pressure · morning</span></div></div>
+            <div class="med"><i class="o" style="background:#FFFFFF"></i><div>Metformin 500 mg<span>For blood sugar · morning, noon, evening</span></div></div>
+            <div class="med"><i style="background:#F4A6B7"></i><div>Atorvastatin 20 mg<span>For cholesterol · evening</span></div></div>
+            <div class="med"><i style="background:#BCA9E8"></i><div>Melatonin 3 mg<span>For sleep · bedtime</span></div></div>
+          </div>
+          <div class="tile"><small>Delivery or pickup</small>Pickup at your pharmacy. Ask them to switch you to delivery any time.</div>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+      <p class="scrollhint">Example screens · scroll inside the phone</p></div>
+    </div>
+  </section>
 
-    <section>
-      <div class="offer">
-        <div>
-          <h2>Become a founding pharmacy</h2>
-          <p>We're looking for 5 Canadian pharmacies to try Blisterwise, tell us what works and help shape it.</p>
-          <a class="btn" href="#apply">Apply for the pilot →</a>
-          <small>Applying is free and doesn't commit you to anything. Please don't include any patient information.</small>
-        </div>
-        <ul>
-          <li><b>12 weeks free</b>Full pilot with setup help</li>
-          <li><b>$149/month for your first year</b>Founding price — regular $299/month</li>
-        </ul>
+  <section id="pilot-offer">
+    <div class="split">
+      <div>
+        <span class="label">Founding pharmacies</span>
+        <h2>Help shape Blisterwise.</h2>
+        <p class="lead" style="margin-bottom:0">We're looking for 5 Canadian pharmacies to try it, tell us what works and what doesn't.</p>
       </div>
-      <p class="note" style="margin-top:12px">Prices in Canadian dollars, plus applicable taxes.</p>
-    </section>
-
-    <section id="apply">
-      <div class="apply">
-        <div class="intro">
-          <h2>Apply for the pilot</h2>
-          <p>Tell us a little about your pharmacy. It takes about two minutes, and we'll reply within a few days.</p>
-          <p>Please don't include any patient information.</p>
+      <div>
+        <div class="figures">
+          <div><span class="big">12 weeks</span><p>Free pilot, with setup help.</p></div>
+          <div><span class="big"><em>$149</em></span><p>A month for your first year. Regular price $299 a month.</p></div>
         </div>
+        <div class="offer-cta">
+          <a class="btn" href="#apply">Apply for the pilot <span class="arr">→</span></a>
+          <span class="fine">Applying is free and doesn't commit you to anything.<br>Prices in Canadian dollars, plus applicable taxes.</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <section id="apply" hidden>
+    <div class="split">
+      <div>
+        <span class="label">Apply</span>
+        <h2>Apply for the pilot.</h2>
+        <p class="lead">Tell us a little about your pharmacy. It takes about two minutes, and we'll reply within a few days.</p>
+        <p class="fine">Please don't include any patient information.</p>
+      </div>
+      <div>
         <form class="pilot" id="pilot" novalidate>
           <div class="row2">
             <div class="fld"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required><div class="err"></div></div>
@@ -313,26 +381,39 @@
           <div class="fld" data-required>
             <label class="consent"><input type="checkbox" name="consent" value="Yes">I agree to be contacted by Blisterwise about the pilot. We'll only use your details for this (<a href="privacy.html" target="_blank">privacy</a>).</label><div class="err"></div>
           </div>
-          <button class="btn" type="submit">Send application →</button>
+          <button class="btn" type="submit">Send application <span class="arr">→</span></button>
           <div class="status" role="status" aria-live="polite"></div>
         </form>
 
         <div class="thanks" id="thanks" hidden tabindex="-1">
-          <div class="tick">✓</div>
-          <h2>Thanks, we've got it!</h2>
+          <h2>Thanks, we've got it.</h2>
           <p>We'll be in touch within a few days at the email you gave us.<br>Questions in the meantime? <a href="mailto:haasita@blisterwise.ca">haasita@blisterwise.ca</a></p>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>
 
-  <footer>
+<footer>
+  <div class="wrap">
     <span>© 2026 Blisterwise · <a href="privacy.html">Privacy</a></span>
     <span>Questions? <a href="mailto:haasita@blisterwise.ca">haasita@blisterwise.ca</a></span>
-  </footer>
-</div>
+  </div>
+</footer>
 
 <script>
+  // The application form stays hidden until someone clicks an "Apply" button.
+  const applySection = document.getElementById("apply");
+  function openApply(e){
+    if (e) e.preventDefault();
+    applySection.hidden = false;
+    history.replaceState(null, "", "#apply");
+    applySection.scrollIntoView({behavior: "smooth", block: "start"});
+    setTimeout(() => document.getElementById("f-name").focus({preventScroll: true}), 400);
+  }
+  document.querySelectorAll('a[href="#apply"]').forEach(a => a.addEventListener("click", openApply));
+  if (location.hash === "#apply") openApply();
+
   // Pilot applications go to a Google Apps Script web app in the Blisterwise account,
   // which saves them to the "Blisterwise pilot sign-ups" sheet and emails Haasita.
   const SIGNUP_URL = "https://script.google.com/macros/s/AKfycbzesR98QxyE1LL6ynX94jxdED1zVGiz5G6GWkTP0oeJ2Oyp65STnH4NxiCwgzSGWmIJ/exec";
@@ -368,8 +449,32 @@
     }
   });
 
+  // Patient app phone: drifts slowly on its own, and visitors can scroll it themselves.
+  // Auto-scroll pauses while someone is scrolling, hovering or touching, and resumes after a few seconds.
+  (() => {
+    const vp = document.querySelector(".viewport"), feed = vp && vp.querySelector(".feed");
+    if (!vp || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let pausedUntil = 0, last = 0, pos = 0, hovering = false;
+    const pause = () => { pausedUntil = performance.now() + 4000; };
+    ["wheel", "touchstart", "pointerdown", "keydown"].forEach(ev => vp.addEventListener(ev, pause, {passive: true}));
+    vp.addEventListener("pointerenter", () => hovering = true);
+    vp.addEventListener("pointerleave", () => { hovering = false; pause(); });
+    function step(t){
+      const dt = last ? Math.min(t - last, 50) : 0; last = t;
+      if (!hovering && t > pausedUntil && !document.hidden) {
+        if (Math.abs(vp.scrollTop - pos) > 2) pos = vp.scrollTop;   // someone scrolled: carry on from there
+        pos += dt * 0.022;                                           // about 22 pixels a second
+        const loop = feed.offsetHeight;
+        if (pos >= loop) pos -= loop;                                // second copy matches the first, so this is seamless
+        vp.scrollTop = pos;
+      } else { pos = vp.scrollTop; }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  })();
+
   // Draw the example pack: the same pills every day, by time of day (made-up example).
-  const W = "#FFFFFF", Y = "#F2C94C", P = "#F4A6B7", B = "#8FB3E8", L = "#BCA9E8";
+  const W = "#FFFFFF", Y = "#F2C94C", P = "#F4A6B7", L = "#BCA9E8";
   const times = [["Morning", [[W,1],[Y,0],[P,0]]], ["Noon", [[W,1]]], ["Evening", [[W,1],[P,0]]], ["Bedtime", [[L,0]]]];
   const pack = document.getElementById("pack");
   const el = (cls, txt) => { const e = document.createElement("div"); e.className = cls; if (txt) e.textContent = txt; return e; };
