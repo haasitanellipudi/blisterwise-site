@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blisterwise — coming soon</title>
-<meta name="description" content="Blisterwise helps Canadian pharmacies track compliance packs: who's due, what's filled, what's checked and what's gone out. Apply to be one of 5 founding pilot pharmacies.">
-<meta property="og:title" content="Blisterwise — compliance packs, on schedule">
-<meta property="og:description" content="Coming soon for Canadian pharmacies. Apply to be one of 5 founding pilot pharmacies.">
+<title>Blisterwise: blister pack tracking for Canadian pharmacies</title>
+<meta name="description" content="Blisterwise helps Canadian pharmacies track compliance packs: who's due, what's filled, what's checked and what's gone out. Apply to join the limited beta.">
+<meta property="og:title" content="Blisterwise: blister pack tracking for Canadian pharmacies">
+<meta property="og:description" content="Track every blister pack, from due date to pickup. Limited beta for Canadian pharmacies.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Blisterwise">
 <meta property="og:url" content="https://blisterwise.ca/">
 <meta property="og:image" content="https://blisterwise.ca/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Blisterwise: compliance packs, on schedule. A weekly blister pack, filled, checked and ready for pickup.">
+<meta property="og:image:alt" content="Blisterwise: track every blister pack, from due date to pickup. A weekly blister pack, filled, checked and ready for pickup.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -37,7 +37,7 @@
   body{margin:0; background:var(--bg); color:var(--ink); font:17px/1.6 var(--f-body); -webkit-font-smoothing:antialiased}
   a{color:inherit; text-underline-offset:3px}
   .wrap{max-width:1140px; margin:0 auto; padding:0 24px}
-  h1,h2{font-family:var(--f-display); font-weight:200; line-height:.95; letter-spacing:-.005em; margin:0}
+  h1,h2{font-family:var(--f-body); font-weight:600; line-height:1.2; letter-spacing:-.01em; margin:0}
   h3{font-size:18px; font-weight:600; margin:0}
   .label{display:block; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:22px}
   .muted{color:var(--muted)}
@@ -61,7 +61,7 @@
 
   /* Hero */
   .hero{display:grid; grid-template-columns:1.12fr .88fr; gap:64px; align-items:center; padding:72px 0 72px}
-  .hero h1{font-size:clamp(60px,7.4vw,112px)}
+  .hero h1{font-size:clamp(30px,3.4vw,42px); max-width:20ch}
   .hero h1 em{white-space:nowrap}
   .hero h1 em{font-style:normal; color:var(--accent)}
   .lead{font-size:clamp(18px,1.6vw,20px); color:var(--muted); max-width:31em; margin:28px 0 36px}
@@ -85,7 +85,7 @@
 
   /* Sections */
   section{padding:80px 0; border-top:1px solid var(--line)}
-  section h2{font-size:clamp(48px,6.4vw,84px)}
+  section h2{font-size:clamp(24px,2.6vw,32px); max-width:28ch}
   .split{display:grid; grid-template-columns:.9fr 1.1fr; gap:64px; align-items:start}
 
   .features{display:grid; grid-template-columns:repeat(3,1fr); gap:40px; margin-top:48px}
@@ -134,6 +134,13 @@
   .figures .big{display:block; font:200 clamp(56px,6vw,84px)/.9 var(--f-display); white-space:nowrap}
   .figures .big em{font-style:normal; color:var(--accent)}
   .figures p{margin:12px 0 0; color:var(--muted)}
+  .timeline{list-style:none; padding:0; margin:0}
+  .timeline li{display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:18px 0; border-top:1px solid var(--line)}
+  .timeline li:last-child{border-bottom:1px solid var(--line)}
+  .timeline .when{color:var(--muted)}
+  .timeline .price{font-size:22px; font-weight:600; white-space:nowrap}
+  .timeline .price small{font-size:15px; font-weight:400; color:var(--muted)}
+  #pricing .fine{display:block; margin-top:16px}
   .offer-cta{margin-top:48px; display:flex; flex-wrap:wrap; gap:24px; align-items:center}
   .fine{font-size:14px; color:var(--muted)}
 
@@ -171,7 +178,7 @@
   form.pilot .btn[disabled]{opacity:.5; cursor:wait}
   .status{font-size:14px}
   .thanks{border-top:1px solid var(--ink); padding-top:28px}
-  .thanks h2{font-size:clamp(44px,5vw,64px)}
+  .thanks h2{font-size:clamp(24px,2.6vw,32px)}
   .thanks p{color:var(--muted); margin:16px 0 0}
 
   footer{border-top:1px solid var(--line)}
@@ -199,7 +206,8 @@
     <nav aria-label="Main">
       <a href="#pharmacies">For pharmacies</a>
       <a href="#patients">For patients</a>
-      <a href="#pilot-offer">Pilot</a>
+      <a href="#pilot-offer">Beta</a>
+      <a href="#pricing">Pricing</a>
       <a class="btn small" href="#apply">Apply</a>
     </nav>
   </div>
@@ -208,12 +216,12 @@
 <main class="wrap">
   <div class="hero">
     <div>
-      <span class="label">Coming soon · For Canadian pharmacies</span>
-      <h1>Compliance packs, <em>on schedule.</em></h1>
+      <span class="label">Limited beta · For Canadian pharmacies</span>
+      <h1>Track every blister pack, from due date to pickup.</h1>
       <p class="lead">Blisterwise keeps every blister pack on track: who's due this week, what's been filled, what the pharmacist has checked and what's gone out the door. Patients get their own app, too.</p>
       <div class="actions">
-        <a class="btn" href="#apply">Apply for the pilot <span class="arr">→</span></a>
-        <span class="note">5 founding spots</span>
+        <a class="btn" href="#apply">Apply for the beta <span class="arr">→</span></a>
+        <span class="note">5 pharmacies</span>
       </div>
     </div>
 
@@ -226,7 +234,7 @@
 
   <section id="pharmacies">
     <span class="label">For pharmacies</span>
-    <h2>Built for the pack room.</h2>
+    <h2>Schedule, fill, check and hand off every pack in one place.</h2>
     <div class="features">
       <div><h3>Know who's due</h3><p>One list of every pack coming up, with prep and billing dates worked out for weekly, two-week and monthly patients.</p></div>
       <div><h3>Fill and check with confidence</h3><p>Scan each bottle to catch the wrong drug, strength or expiry. A second person checks it before it leaves.</p></div>
@@ -238,8 +246,8 @@
     <div class="split">
       <div>
         <span class="label">For patients and families</span>
-        <h2>An app that explains the pack.</h2>
-        <p class="lead" style="margin-bottom:0">Patients and caregivers see what's coming and what's inside, without calling the pharmacy.</p>
+        <h2>Patients see what's in each pack and when it's ready.</h2>
+        <p class="lead" style="margin-bottom:0">Patients and caregivers get their own app, so they don't need to call the pharmacy to ask.</p>
         <ul class="points">
           <li><h3>When the next pack is ready</h3><p>Pickup or delivery day, updated as the pharmacy fills and checks it.</p></li>
           <li><h3>What's in each pocket</h3><p>Tap a pocket to see each pill, what it looks like and what it's for.</p></li>
@@ -304,19 +312,38 @@
   <section id="pilot-offer">
     <div class="split">
       <div>
-        <span class="label">Founding pharmacies</span>
-        <h2>Help shape Blisterwise.</h2>
-        <p class="lead" style="margin-bottom:0">We're looking for 5 Canadian pharmacies to try it, tell us what works and what doesn't.</p>
+        <span class="label">Limited beta</span>
+        <h2>We're inviting 5 Canadian pharmacies to use Blisterwise first.</h2>
+        <p class="lead" style="margin-bottom:0">Tell us what works and what doesn't, and help decide what we build next.</p>
       </div>
       <div>
-        <div class="figures">
-          <div><span class="big">12 weeks</span><p>Free pilot, with setup help.</p></div>
-          <div><span class="big"><em>$149</em></span><p>A month for your first year. Regular price $299 a month.</p></div>
-        </div>
+        <ul class="points" style="margin-top:0">
+          <li><h3>Free for the first 12 weeks</h3><p>No cost while you try it with your team. <a href="#pricing">See pricing</a>.</p></li>
+          <li><h3>Set up with you, in person</h3><p>We come to your pharmacy, get you started and train your staff.</p></li>
+          <li><h3>A direct line to the founder</h3><p>Regular check-ins, and fixes based on what you need.</p></li>
+        </ul>
         <div class="offer-cta">
-          <a class="btn" href="#apply">Apply for the pilot <span class="arr">→</span></a>
-          <span class="fine">Applying is free and doesn't commit you to anything.<br>Prices in Canadian dollars, plus applicable taxes.</span>
+          <a class="btn" href="#apply">Apply for the beta <span class="arr">→</span></a>
+          <span class="fine">Applying is free and doesn't commit you to anything.</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="split">
+      <div>
+        <span class="label">Pricing</span>
+        <h2>What a beta pharmacy pays.</h2>
+        <p class="lead" style="margin-bottom:0">One price per pharmacy, for all your staff and patients. Nothing to pay until the 12 free weeks are over, and no obligation to continue.</p>
+      </div>
+      <div>
+        <ol class="timeline">
+          <li><span class="when">First 12 weeks</span><span class="price">Free</span></li>
+          <li><span class="when">Next 12 months</span><span class="price">$149<small> / month</small></span></li>
+          <li><span class="when">After that</span><span class="price">$299<small> / month</small></span></li>
+        </ol>
+        <p class="fine">In Canadian dollars, plus applicable taxes. $299 a month is the regular price for pharmacies that join after the beta.</p>
       </div>
     </div>
   </section>
@@ -325,12 +352,12 @@
     <div class="split">
       <div class="apply-intro">
         <span class="label">Apply</span>
-        <h2>Apply for the pilot.</h2>
+        <h2>Apply for the beta.</h2>
         <p class="lead">Tell us a little about your pharmacy. It takes about two minutes, and we'll reply within a few days.</p>
         <ol class="next">
           <li><h3>We reply within a few days</h3><p>A short email from Haasita, the founder.</p></li>
           <li><h3>An in-person visit</h3><p>We come to your pharmacy, see how you handle packs today and show you Blisterwise.</p></li>
-          <li><h3>Choosing the founding 5</h3><p>If it's a fit, we sign a short pilot agreement, including confidentiality, and set you up for the free 12-week pilot.</p></li>
+          <li><h3>Choosing the 5 beta pharmacies</h3><p>If it's a fit, we sign a short agreement, including confidentiality, and set you up.</p></li>
         </ol>
         <p class="fine">Please don't include any patient information.</p>
       </div>
@@ -383,7 +410,7 @@
             </div><div class="err"></div>
           </fieldset>
           <fieldset class="fld" data-required>
-            <legend>Interested in being one of the 5 founding pilot pharmacies?</legend>
+            <legend>Interested in being one of the 5 beta pharmacies?</legend>
             <div class="choices">
               <label><input type="radio" name="founding" value="Yes">Yes</label>
               <label><input type="radio" name="founding" value="Maybe, tell me more">Maybe, tell me more</label>
@@ -392,7 +419,7 @@
           <div class="fld"><label for="f-wishes">Anything you'd want Blisterwise to do? <span class="opt">(optional)</span></label><textarea id="f-wishes" name="wishes" maxlength="1000" placeholder="e.g. Remind us when a patient's billing date is coming up"></textarea></div>
           <div class="trap" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
           <div class="fld" data-required>
-            <label class="consent"><input type="checkbox" name="consent" value="Yes"><span>I agree to be contacted by Blisterwise about the pilot. We'll only use your details for this (<a href="privacy.html" target="_blank">privacy</a>).</span></label><div class="err"></div>
+            <label class="consent"><input type="checkbox" name="consent" value="Yes"><span>I agree to be contacted by Blisterwise about the beta. We'll only use your details for this (<a href="privacy.html" target="_blank">privacy</a>).</span></label><div class="err"></div>
           </div>
           <button class="btn" type="submit">Send application <span class="arr">→</span></button>
           <div class="status" role="status" aria-live="polite"></div>
