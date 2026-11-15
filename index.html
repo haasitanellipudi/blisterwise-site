@@ -19,14 +19,14 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@200;300;400&family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#F7F7F5; --surface:#FFFFFF; --ink:#18181A; --muted:#66666D; --faint:#B9B9BE; --line:#E2E2DE;
     --accent:#1F5FAD; --soft:#EDF2F9; --pocket:#F1F1EF; --ok:#1E7A46; --ok-soft:#E7F3EC;
     --warn:#9A5B00; --warn-soft:#FBF0DC; --err:#B3261E; --err-soft:#FBE9E7;
-    --f-body:"Albert Sans", "Avenir Next", "Helvetica Neue", Arial, system-ui, sans-serif;
-    --f-display:"Alumni Sans", "Avenir Next Condensed", "Arial Narrow", sans-serif;
+    --f-body:"Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, system-ui, sans-serif;
+    --f-display:"Inter Tight", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     --f-mono:ui-monospace, "SF Mono", Menlo, Consolas, monospace;
     --ease:cubic-bezier(.2,.7,.2,1);
   }
@@ -42,7 +42,7 @@
   a{color:inherit; text-underline-offset:3px}
   .wrap{max-width:1180px; margin:0 auto; padding:0 24px}
   h1,h2,h3{margin:0}
-  h2{font:300 clamp(44px,6vw,80px)/.95 var(--f-display); letter-spacing:-.005em; max-width:18ch; text-wrap:balance}
+  h2{font:600 clamp(38px,5vw,64px)/1.04 var(--f-display); letter-spacing:-.035em; max-width:18ch; text-wrap:balance}
   .hero h1, .statement p{text-wrap:balance}
   h3{font-size:18px; font-weight:600; line-height:1.35}
   p{margin:0}
@@ -77,7 +77,7 @@
 
   /* Hero */
   .hero{text-align:center; padding:96px 0 0}
-  .hero h1{font:300 clamp(64px,11vw,148px)/.86 var(--f-display); letter-spacing:-.01em; max-width:14ch; margin:0 auto}
+  .hero h1{font:600 clamp(48px,7.4vw,104px)/1 var(--f-display); letter-spacing:-.045em; max-width:15ch; margin:0 auto}
   .hero h1 em{font-style:normal; color:var(--accent)}
   .hero .lead{margin:30px auto 36px; max-width:30em}
   .actions{display:flex; flex-wrap:wrap; gap:28px; align-items:center; justify-content:center}
@@ -113,7 +113,7 @@
 
   /* Statement: words light up as you scroll */
   .statement{padding:160px 0}
-  .statement p{font:300 clamp(36px,4.6vw,64px)/1.05 var(--f-display); max-width:25ch; margin:0 auto; text-align:center}
+  .statement p{font:600 clamp(30px,3.8vw,52px)/1.15 var(--f-display); letter-spacing:-.03em; max-width:26ch; margin:0 auto; text-align:center}
   .statement .w{color:var(--faint); transition:color .35s}
   .statement .w.on{color:var(--ink)}
   .statement .w.on.hl{color:var(--accent)}
@@ -149,7 +149,7 @@
   .s1 .status .dot{background:var(--warn)} .s2 .status .dot{background:var(--accent)} .s3 .status .dot{background:var(--ok)}
   .stamp{position:absolute; right:22px; top:50%; transform:translateY(-50%) rotate(-8deg) scale(1.4); opacity:0;
          border:2px solid var(--ok); color:var(--ok); background:var(--surface); border-radius:10px; padding:10px 16px; text-align:center;
-         font:400 30px/1 var(--f-display); text-transform:uppercase; letter-spacing:.04em; transition:transform .5s var(--ease), opacity .3s; pointer-events:none}
+         font:600 22px/1 var(--f-display); text-transform:uppercase; letter-spacing:.02em; transition:transform .5s var(--ease), opacity .3s; pointer-events:none}
   .stamp small{display:block; font:500 11px var(--f-mono); letter-spacing:.04em; text-transform:none; margin-top:6px}
   .s3 .stamp{opacity:1; transform:translateY(-50%) rotate(-8deg) scale(1)}
   .story.static{height:auto} .story.static .pin{position:static; height:auto; padding:140px 0}
@@ -170,7 +170,7 @@
   .chip small{display:block; color:var(--muted); font-size:13px}
   .scanner .screen{padding:36px; display:flex; flex-direction:column; justify-content:center; gap:18px; min-height:380px; position:relative}
   .scanner .ctx{font:500 12px var(--f-mono); color:var(--muted); text-transform:uppercase; letter-spacing:.06em}
-  .scanner .need{font:300 40px/1 var(--f-display)}
+  .scanner .need{font:600 32px/1.1 var(--f-display); letter-spacing:-.03em}
   .barcode{height:70px; border-radius:8px; position:relative; overflow:hidden;
            background:repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px, var(--ink) 5px 6px, transparent 6px 9px, var(--ink) 9px 12px, transparent 12px 14px);
            opacity:.85}
@@ -203,11 +203,11 @@
   .mini i{aspect-ratio:1; border-radius:5px; background:var(--pocket); border:1px solid var(--line)}
   .mini i.done{background:var(--line)} .mini i.now{border:2px solid var(--accent); background:var(--soft)}
   .minicap{font-size:12px; color:var(--muted); margin-top:8px}
-  .scr .hi{font:300 32px var(--f-display); padding:0 4px 4px}
+  .scr .hi{font:600 26px var(--f-display); letter-spacing:-.03em; padding:0 4px 4px}
   .tile{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px; font-size:13px}
   .tile small{display:block; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.12em; font-weight:600; margin-bottom:2px}
   .tile.ready{background:var(--accent); color:#fff; border-color:transparent} .tile.ready small{color:inherit; opacity:.8}
-  .tile.ready b{display:block; font:400 30px/1 var(--f-display); margin:4px 0}
+  .tile.ready b{display:block; font:600 22px/1.1 var(--f-display); letter-spacing:-.02em; margin:4px 0}
   .med{display:flex; gap:10px; align-items:center; padding-top:8px}
   .med i{flex:none; width:12px; height:12px; border-radius:50%; border:1px solid rgba(0,0,0,.15); margin:0 2px}
   .med i.o{width:16px; height:9px; border-radius:5px; margin:0}
@@ -218,7 +218,7 @@
   #trial{border-top:1px solid var(--line)}
   .facts{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin:72px 0 0; border-top:1px solid var(--ink)}
   .facts div{padding:24px 24px 0 0}
-  .facts .big{display:block; font:200 clamp(56px,6.4vw,92px)/.9 var(--f-display); white-space:nowrap}
+  .facts .big{display:block; font:600 clamp(44px,5vw,72px)/1 var(--f-display); letter-spacing:-.045em; white-space:nowrap}
   .facts .big.soon{color:var(--accent)}
   .facts p{margin-top:12px; color:var(--muted); font-size:15px; max-width:16em}
   .apply{display:grid; grid-template-columns:.8fr 1.2fr; gap:80px; margin-top:120px; align-items:start}
@@ -239,7 +239,7 @@
   form.pilot .btn[disabled]{opacity:.5; cursor:wait}
   .form-status{font-size:14px}
   .thanks{background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:48px 36px}
-  .thanks h3{font:300 52px/1 var(--f-display)}
+  .thanks h3{font:600 40px/1.05 var(--f-display); letter-spacing:-.035em}
   .thanks p{color:var(--muted); margin-top:16px}
 
   footer{border-top:1px solid var(--line)}
@@ -419,7 +419,7 @@
 
       <div class="apply" id="apply">
         <div data-reveal>
-          <h3 style="font:300 clamp(40px,4.4vw,60px)/.95 var(--f-display)">Tell us about your pharmacy.</h3>
+          <h3 style="font:600 clamp(32px,3.6vw,48px)/1.05 var(--f-display); letter-spacing:-.035em">Tell us about your pharmacy.</h3>
           <p class="note">We reply within a few days, then come in to set you up. Your free month starts once your team is ready.</p>
         </div>
         <div data-reveal>
