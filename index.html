@@ -66,7 +66,9 @@
   .btn:hover{transform:translateY(-1px)} .btn:active{transform:none; opacity:.85}
   .btn .arr{color:#6FA6EA; transition:transform .2s var(--ease)} .btn:hover .arr{transform:translateX(3px)}
   @media (prefers-color-scheme: dark){ .btn .arr{color:#1F5FAD} }
-  .btn.small{padding:8px 16px; font-size:14px}
+  .btn.small{padding:8px 16px; font-size:14px; min-height:44px}
+  footer a{display:inline-block; padding:12px 0}
+  .actions .link{display:inline-block; padding:12px 0}
   .link{color:var(--muted); text-decoration:none; font-size:16px} .link:hover{color:var(--ink)}
 
   /* Reveal on scroll */
@@ -118,7 +120,7 @@
   .statement .w.on{color:var(--ink)}
   .statement .w.on.hl{color:var(--accent)}
 
-  /* How it works: pinned while the pack moves through its four steps */
+  /* How it works: the four steps, all visible */
   #how{padding:0}
   .story{position:relative; height:420vh}
   .story .pin{position:sticky; top:60px; height:calc(100vh - 60px); display:grid; grid-template-columns:.9fr 1.1fr; gap:72px; align-items:center}
@@ -152,7 +154,7 @@
          font:600 22px/1 var(--f-display); text-transform:uppercase; letter-spacing:.02em; transition:transform .5s var(--ease), opacity .3s; pointer-events:none}
   .stamp small{display:block; font:500 11px var(--f-mono); letter-spacing:.04em; text-transform:none; margin-top:6px}
   .s3 .stamp{opacity:1; transform:translateY(-50%) rotate(-8deg) scale(1)}
-  .story.static{height:auto} .story.static .pin{position:static; height:auto; padding:140px 0}
+  .story.static{height:auto} .story.static .pin{position:static; height:auto; padding:140px 24px}
   .story.static li{opacity:1; border-left-color:var(--accent)} .story.static li p{grid-template-rows:1fr}
 
   /* Try it: scanning a bottle */
@@ -181,7 +183,7 @@
   .result b{display:block; font-size:18px; margin-bottom:2px}
   .result.ok{background:var(--ok-soft); color:var(--ok)} .result.err{background:var(--err-soft); color:var(--err)} .result.warn{background:var(--warn-soft); color:var(--warn)}
   .result span{color:var(--ink); opacity:.8}
-  .scanning .result{opacity:0; transform:translateY(8px)}
+  
 
   /* Patients */
   .split{display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center}
@@ -219,7 +221,7 @@
   .facts{display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin:72px 0 0; border-top:1px solid var(--ink)}
   .facts div{padding:24px 24px 0 0}
   .facts .big{display:block; font:600 clamp(44px,5vw,72px)/1 var(--f-display); letter-spacing:-.045em; white-space:nowrap}
-  .facts .big.soon{color:var(--accent)}
+  
   .facts p{margin-top:12px; color:var(--muted); font-size:15px; max-width:16em}
   .apply{display:grid; grid-template-columns:.8fr 1.2fr; gap:80px; margin-top:120px; align-items:start}
   .apply .note{color:var(--muted); margin-top:20px; max-width:26em}
@@ -286,9 +288,8 @@
     </a>
     <nav aria-label="Main">
       <a href="#how">How it works</a>
-      <a href="#patients">For patients</a>
-      <a href="#trial">Free trial</a>
-      <a class="btn small" href="#apply">Start free trial</a>
+            <a href="#trial">Free trial</a>
+      <a class="btn small" href="#apply">Book a demo</a>
     </nav>
   </div>
 </header>
@@ -299,12 +300,12 @@
     <h1><span class="ln">Every blister pack,</span> <span class="ln"><em>accounted for.</em></span></h1>
     <p class="lead">Blisterwise shows who's due, what's filled, what's checked and what's gone out, for every compliance pack in your pharmacy.</p>
     <div class="actions">
-      <a class="btn" href="#apply">Start your free month <span class="arr">→</span></a>
-      <a class="link" href="#how">See how it works ↓</a>
+      <a class="btn" href="#apply">Book a 20-minute demo <span class="arr">→</span></a>
+      <a class="link" href="#try">Try the bottle scan ↓</a>
     </div>
 
-    <figure class="board" aria-label="Example: this week's packs in Blisterwise, each moving from due to filled, checked and picked up (made-up patients)" style="margin-bottom:0">
-      <div class="bar"><span aria-hidden="true"><i></i><i></i><i></i></span>This week<span class="count" id="board-count"></span></div>
+    <figure class="board" aria-label="Sample data: the next 7 days of packs in Blisterwise, each moving from due to filled, checked and picked up (made-up patients)" style="margin-bottom:0">
+      <div class="bar"><span aria-hidden="true"><i></i><i></i><i></i></span>Next 7 days · sample data<span class="count" id="board-count"></span></div>
       <div class="rows" id="board" aria-hidden="true">
         <div class="r h"><span>Patient</span><span class="cyc">Cycle</span><span>Due</span><span>Progress</span></div>
       </div>
@@ -313,29 +314,6 @@
 
   <section class="statement" aria-label="Why Blisterwise">
     <div class="wrap"><p id="statement">Most pharmacies track packs with binders, whiteboards and memory. Blisterwise puts every pack in one list your whole team can trust.</p></div>
-  </section>
-
-  <section id="how">
-    <div class="story" id="story">
-      <div class="pin wrap">
-        <div class="intro">
-          <span class="label">How it works</span>
-          <h2>One pack, four steps.</h2>
-          <ol id="story-steps">
-            <li><span class="n">01 · DUE</span><h3>Know who's due</h3><p><span>Every patient's next pack, with prep dates worked out for weekly, two-week and monthly cycles. Start a new patient from a photo of their grid.</span></p></li>
-            <li><span class="n">02 · FILL</span><h3>Fill by scanning</h3><p><span>Scan each bottle. Blisterwise saves the lot and expiry, and stops the wrong drug, strength or form.</span></p></li>
-            <li><span class="n">03 · CHECK</span><h3>A second person checks</h3><p><span>A pharmacist checks the pack with their own PIN. Nobody can check their own work.</span></p></li>
-            <li><span class="n">04 · HAND OFF</span><h3>Hand off and roll forward</h3><p><span>Record pickup or delivery. The next due date moves forward on its own, and every step is logged.</span></p></li>
-          </ol>
-        </div>
-        <figure class="pack" id="story-pack" aria-label="Example weekly pack for a made-up patient" style="margin:0">
-          <div class="top"><b>Margaret L. · Weekly pack</b><span>WEEK OF NOV 16</span></div>
-          <div class="grid" id="pack" aria-hidden="true"></div>
-          <div class="status" aria-live="polite"><span class="dot"></span><span id="story-status">Due Thursday · prep Tuesday</span></div>
-          <div class="stamp" aria-hidden="true">Picked up<small>Next pack due Nov 26</small></div>
-        </figure>
-      </div>
-    </div>
   </section>
 
   <section id="try">
@@ -364,11 +342,35 @@
     </div>
   </section>
 
+  <section id="how">
+    <div class="story" id="story">
+      <div class="pin wrap">
+        <div class="intro">
+          <span class="label">How it works</span>
+          <h2>One pack, four steps.</h2>
+          <ol id="story-steps">
+            <li><span class="n">01 · DUE</span><h3>Know who's due</h3><p><span>Every patient's next pack, with prep dates worked out for weekly, two-week and monthly cycles. Start a new patient from a photo of their grid: staff check each line before it's saved.</span></p></li>
+            <li><span class="n">02 · FILL</span><h3>Fill by scanning</h3><p><span>Scan each bottle. Blisterwise checks it against the patient's medication list, stops the wrong drug, strength or form, and records the lot and expiry.</span></p></li>
+            <li><span class="n">03 · CHECK</span><h3>A second person checks</h3><p><span>A pharmacist checks the pack with their own PIN. If they made it themselves, they have to give a reason, and it's logged.</span></p></li>
+            <li><span class="n">04 · HAND OFF</span><h3>Hand off and roll forward</h3><p><span>Record pickup or delivery. The next due date moves forward on its own, and every step is logged.</span></p></li>
+          </ol>
+        </div>
+        <figure class="pack" id="story-pack" aria-label="Example weekly pack for a made-up patient" style="margin:0">
+          <div class="top"><b>Margaret L. · Weekly pack</b><span>WEEK OF NOV 16</span></div>
+          <div class="grid" id="pack" aria-hidden="true"></div>
+          <div class="status" aria-live="polite"><span class="dot"></span><span id="story-status">Due Thursday · prep Tuesday</span></div>
+          <div class="stamp" aria-hidden="true">Picked up<small>Next pack due Nov 26</small></div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <section id="patients">
     <div class="wrap split">
       <div data-reveal>
-        <span class="label">For patients and families</span>
-        <h2>Patients see what's in each pack, and when it's ready.</h2>
+        <span class="label">Planned · For patients and families</span>
+        <h2>Next: let patients see when their pack is ready.</h2>
+        <p class="lead" style="margin-top:20px">Not available yet. If your patients would use it, tell us in the form below.</p>
         <ul class="points">
           <li><h3>When the next pack is ready</h3><p>Updated as the pharmacy fills and checks it, so nobody needs to call and ask.</p></li>
           <li><h3>What's in each pocket</h3><p>Each pill, what it looks like and what it's for.</p></li>
@@ -390,7 +392,7 @@
                 <div class="med"><i class="o" style="background:#FFFFFF"></i><div>Metformin 500 mg<span>For blood sugar · white oval</span></div></div>
                 <div class="med"><i style="background:#F4A6B7"></i><div>Atorvastatin 20 mg<span>For cholesterol · pink round</span></div></div>
               </div>
-              <div class="tile msg"><b>From your pharmacy</b>Your new prescription for amlodipine arrived. Nothing to do: it will be in your next pack.</div>
+              <div class="tile msg"><b>From your pharmacy</b>Amlodipine is new this month. It's the yellow pill in your morning pocket.</div>
               <div class="tile"><small>Your medications</small>
                 <div class="med"><i style="background:#F2C94C"></i><div>Amlodipine 5 mg<span>For blood pressure · morning</span></div></div>
                 <div class="med"><i class="o" style="background:#FFFFFF"></i><div>Metformin 500 mg<span>For blood sugar · morning, noon, evening</span></div></div>
@@ -401,7 +403,7 @@
           </div>
         </div>
       </div>
-      <p class="hint">EXAMPLE SCREENS · SCROLL INSIDE THE PHONE</p></div>
+      <p class="hint">PLANNED · EXAMPLE SCREENS</p></div>
     </div>
   </section>
 
@@ -413,14 +415,14 @@
       </div>
       <div class="facts" data-reveal>
         <div><span class="big">1 month</span><p>free, with your whole team and all your patients. No commitment: stop any time.</p></div>
-        <div><span class="big">In person</span><p>We set you up and train your staff at your pharmacy.</p></div>
-        <div id="pricing"><span class="big soon">Soon</span><p>Pricing is coming soon. Nothing to pay during your free month.</p></div>
+        <div><span class="big">In person</span><p>We set you up and train your staff at your pharmacy in the Greater Toronto Area, or by video elsewhere in Canada.</p></div>
+        <div id="pricing"><span class="big">Soon</span><p>Pricing is coming soon. Nothing to pay during your free month.</p></div>
       </div>
 
       <div class="apply" id="apply">
         <div data-reveal>
           <h3 style="font:600 clamp(32px,3.6vw,48px)/1.05 var(--f-display); letter-spacing:-.035em">Tell us about your pharmacy.</h3>
-          <p class="note">We reply within a few days, then come in to set you up. Your free month starts once your team is ready.</p>
+          <p class="note">1. We reply within a few days to book a 20-minute demo.<br>2. If it's a fit, we set you up and train your team.<br>3. Your free month starts once your team is ready.</p>
         </div>
         <div data-reveal>
           <form class="pilot" id="pilot" novalidate>
@@ -435,14 +437,14 @@
             <div class="fld"><label for="f-wishes">Anything we should know? <span class="opt">(optional)</span></label><textarea id="f-wishes" name="wishes" maxlength="1000" placeholder="e.g. We fill about 60 weekly packs, and use Kroll"></textarea></div>
             <div class="trap" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
             <div class="send">
-              <button class="btn" type="submit">Start free trial <span class="arr">→</span></button>
-              <span class="fine">We'll only use this to set up your trial (<a href="privacy.html">privacy</a>). Please don't include patient information.</span>
+              <button class="btn" type="submit">Request a demo <span class="arr">→</span></button>
+              <span class="fine">We'll only use this to contact you about Blisterwise (<a href="privacy.html">privacy</a>). Please don't include patient information.</span>
             </div>
             <div class="form-status" role="status" aria-live="polite"></div>
           </form>
           <div class="thanks" id="thanks" hidden tabindex="-1">
             <h3>Thanks, we've got it.</h3>
-            <p>We'll reply within a few days at the email you gave us. Questions in the meantime? <a href="mailto:haasita@blisterwise.ca">haasita@blisterwise.ca</a></p>
+            <p>We'll reply within a few days at the email you gave us to book your demo. Questions in the meantime? <a href="mailto:haasita@blisterwise.ca">haasita@blisterwise.ca</a></p>
           </div>
         </div>
       </div>
@@ -452,7 +454,7 @@
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Blisterwise · Made in Canada · <a href="privacy.html">Privacy</a></span>
+    <span>© 2026 Blisterwise Inc. · Toronto, Ontario · <a href="privacy.html">Privacy</a> · <a href="https://www.linkedin.com/company/blisterwise">LinkedIn</a></span>
     <span>Questions? <a href="mailto:haasita@blisterwise.ca">haasita@blisterwise.ca</a></span>
   </div>
 </footer>
@@ -474,7 +476,7 @@
   // ---- Hero: this week's packs move along on their own (made-up patients).
   const STAGES = ["Due", "Filling", "Checking", "Ready", "Picked up"];
   const people = [["Margaret L.", "Weekly", "Thu", 3], ["Robert K.", "Weekly", "Fri", 2], ["Anita P.", "2 weeks", "Mon", 1],
-                  ["George T.", "Monthly", "Nov 28", 0], ["Lena M.", "Weekly", "Today", 4]];
+                  ["George T.", "Monthly", "Sat", 0], ["Lena M.", "Weekly", "Today", 3]];
   const board = $("board");
   const rows = people.map(([name, cycle, due, stage]) => {
     const r = document.createElement("div"); r.className = "r";
@@ -486,16 +488,18 @@
   function paint(row){
     row.el.querySelectorAll(".steps i").forEach((i, n) => i.classList.toggle("on", n < row.stage));
     row.el.querySelector(".steps span").textContent = STAGES[row.stage];
-    const ready = rows.filter(r => r.stage >= 3).length;
-    $("board-count").textContent = `${rows.length} due · ${ready} ready`;
+    const ready = rows.filter(r => r.stage === 3).length;
+    $("board-count").textContent = `${rows.length} packs · ${ready} ready for pickup`;
   }
   rows.forEach(paint);
   if (!reduce) {
+    // One pass: each pack moves forward one step, then the board stays still.
     let turn = 0;
-    setInterval(() => {
+    const timer = setInterval(() => {
       if (document.hidden) return;
-      const row = rows[[1, 2, 0, 3, 4][turn++ % 5]];
-      row.stage = (row.stage + 1) % STAGES.length;
+      if (turn >= 5) return clearInterval(timer);
+      const row = rows[[1, 2, 0, 3, 4][turn++]];
+      row.stage = Math.min(row.stage + 1, STAGES.length - 1);
       paint(row);
       row.el.classList.remove("flash"); void row.el.offsetWidth; row.el.classList.add("flash");
     }, 2200);
@@ -508,14 +512,14 @@
   const words = [...st.querySelectorAll(".w")];
   function lightWords(){
     const r = st.getBoundingClientRect(), vh = innerHeight;
-    const p = reduce ? 1 : Math.min(1, Math.max(0, (vh * .85 - r.top) / (r.height + vh * .35)));
+    const p = 1;
     const n = Math.round(p * words.length);
     words.forEach((w, i) => w.classList.toggle("on", i < n));
   }
 
   // ---- How it works: the pack moves through its four steps as the section scrolls past.
   const W = "#FFFFFF", Y = "#F2C94C", P = "#F4A6B7", L = "#BCA9E8";
-  const times = [["Morning", [[W,1],[Y,0],[P,0]]], ["Noon", [[W,1]]], ["Evening", [[W,1],[P,0]]], ["Bedtime", [[L,0]]]];
+  const times = [["Morning", [[W,1],[Y,0]]], ["Noon", [[W,1]]], ["Evening", [[W,1],[P,0]]], ["Bedtime", [[L,0]]]];
   const pack = $("pack");
   const div = (cls, txt) => { const e = document.createElement("div"); e.className = cls; if (txt) e.textContent = txt; return e; };
   pack.append(div(""));
@@ -547,54 +551,35 @@
     const p = Math.min(.999, Math.max(0, -r.top / span));
     setStep(Math.floor(p * 4));
   }
-  if (reduce) { story.classList.add("static"); setStep(3); }
+  story.classList.add("static"); setStep(3);
 
   let ticking = false;
   addEventListener("scroll", () => {
     if (ticking) return; ticking = true;
-    requestAnimationFrame(() => { ticking = false; lightWords(); if (!reduce) storyScroll(); });
+    requestAnimationFrame(() => { ticking = false; lightWords(); });
   }, {passive: true});
-  addEventListener("resize", () => { lightWords(); if (!reduce) storyScroll(); });
-  lightWords(); if (!reduce) storyScroll();
+  lightWords();
 
   // ---- Try it: scanning a bottle.
   const RESULTS = {
-    ok: ["ok", "Right drug, right strength", "Lot and expiry saved. On to the next bottle."],
+    ok: ["ok", "Right drug, right strength", "Matches the medication list. Lot and expiry recorded."],
     strength: ["err", "Wrong strength", "Margaret takes 500 mg. This bottle is 850 mg."],
     er: ["err", "Wrong form", "This is extended-release. Margaret's metformin is regular."],
     expiry: ["warn", "Expires before the pack is used", "This bottle expires next week, before the last pocket. Use another bottle."],
   };
-  const screen = $("scan-screen"), result = $("scan-result");
+  const screen = $("scan-screen"), result = $("scan-result"), resultHome = result.parentElement;
+  let scanTimer;
   document.querySelectorAll("#chips .chip").forEach(chip => chip.addEventListener("click", () => {
     document.querySelectorAll("#chips .chip").forEach(c => c.setAttribute("aria-pressed", c === chip));
     const [level, title, text] = RESULTS[chip.dataset.r];
-    const show = () => { result.className = "result " + level; result.innerHTML = `<b>${title}</b><span>${text}</span>`; screen.classList.remove("scanning"); };
-    if (reduce) return show();
+    clearTimeout(scanTimer);
+    if (matchMedia("(max-width:900px)").matches) chip.after(result); else resultHome.append(result);
+    result.className = "result " + level; result.innerHTML = `<b>${title}</b><span>${text}</span>`;
+    if (reduce) return;
     screen.classList.remove("scanning"); void screen.offsetWidth; screen.classList.add("scanning");
-    setTimeout(show, 1300);
+    scanTimer = setTimeout(() => screen.classList.remove("scanning"), 700);
   }));
 
-  // ---- Patient app phone: drifts on its own; pauses while someone scrolls, hovers or touches it.
-  (() => {
-    const vp = document.querySelector(".viewport"), feed = vp.querySelector(".feed");
-    vp.append(Object.assign(feed.cloneNode(true), {ariaHidden: "true"}));  // a second copy makes the loop seamless
-    if (reduce) return;
-    let pausedUntil = 0, last = 0, pos = 0, hovering = false;
-    const pause = () => { pausedUntil = performance.now() + 4000; };
-    ["wheel", "touchstart", "pointerdown", "keydown"].forEach(ev => vp.addEventListener(ev, pause, {passive: true}));
-    vp.addEventListener("pointerenter", () => hovering = true);
-    vp.addEventListener("pointerleave", () => { hovering = false; pause(); });
-    (function step(t){
-      const dt = last ? Math.min(t - last, 50) : 0; last = t;
-      if (!hovering && t > pausedUntil && !document.hidden) {
-        if (Math.abs(vp.scrollTop - pos) > 2) pos = vp.scrollTop;
-        pos += dt * 0.022;
-        if (pos >= feed.offsetHeight) pos -= feed.offsetHeight;
-        vp.scrollTop = pos;
-      } else pos = vp.scrollTop;
-      requestAnimationFrame(step);
-    })(0);
-  })();
 
   // ---- Free trial requests: saved to the "Blisterwise pilot sign-ups" sheet by a Google Apps Script
   // web app in the Blisterwise account, which also emails Haasita.
