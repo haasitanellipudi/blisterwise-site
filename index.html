@@ -224,6 +224,14 @@
   .facts div{padding:24px 24px 0 0}
   .facts .big{display:block; font:600 clamp(44px,5vw,72px)/1 var(--f-display); letter-spacing:-.045em; white-space:nowrap}
   
+  .tiers{margin-top:56px; padding-top:28px; border-top:1px solid var(--line)}
+  .tiers h3{font:500 12px/1 var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+  .tiers ul{list-style:none; padding:0; margin:20px 0 0; display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+  .tiers li{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px 22px; display:flex; flex-direction:column-reverse; gap:6px}
+  .tiers li b{font:600 clamp(32px,3.4vw,44px)/1 var(--f-display); letter-spacing:-.035em}
+  .tiers li b::after{content:" /month"; font:500 14px var(--f-body); letter-spacing:0; color:var(--muted)}
+  .tiers li span{font-size:15px; color:var(--muted)}
+  .tiers p{margin-top:16px; color:var(--muted); font-size:15px; max-width:44em}
   .facts p{margin-top:12px; color:var(--muted); font-size:15px; max-width:16em}
   .apply{display:grid; grid-template-columns:.8fr 1.2fr; gap:80px; margin-top:120px; align-items:start}
   .apply .note{color:var(--muted); margin-top:20px; max-width:26em}
@@ -254,7 +262,7 @@
     .split, .apply, .scanner{grid-template-columns:1fr; gap:56px}
     .apply{margin-top:88px; gap:36px}
     .scanner{gap:0} .scanner .pick{border-right:0; border-bottom:1px solid var(--line); padding:24px} .scanner .screen{padding:24px; min-height:320px}
-    .facts{grid-template-columns:1fr} .facts div{padding-bottom:28px}
+    .facts{grid-template-columns:1fr} .facts div{padding-bottom:28px} .tiers ul{grid-template-columns:1fr 1fr} .tiers li{padding:16px} .tiers li b{font-size:28px; white-space:nowrap} .tiers li b::after{font-size:12px}
     .r{grid-template-columns:1.3fr .7fr 1.6fr} .r .cyc{display:none}
     .steps span{width:78px}
     /* Phone: the pack stays in view; only the current step's text shows */
@@ -290,7 +298,7 @@
     </a>
     <nav aria-label="Main">
       <a href="#how">How it works</a>
-            <a href="#trial">Free trial</a>
+            <a href="#pricing">Pricing</a>
       <a class="btn small" href="#apply">Book a demo</a>
     </nav>
   </div>
@@ -420,7 +428,17 @@
       <div class="facts" data-reveal>
         <div><span class="big">1 month</span><p>free, with your whole team and all your patients. No commitment: stop any time.</p></div>
         <div><span class="big">In person</span><p>We set you up and train your staff at your pharmacy in the Greater Toronto Area, or by video elsewhere in Canada.</p></div>
-        <div id="pricing"><span class="big">Soon</span><p>Pricing is coming soon. Nothing to pay during your free month.</p></div>
+        <div><span class="big">From $49</span><p>a month after your free month, based on how many patients you have on packs.</p></div>
+      </div>
+      <div class="tiers" id="pricing" data-reveal>
+        <h3>Monthly price, by patients on blister packs</h3>
+        <ul>
+          <li><span>Up to 50 patients</span><b>$49</b></li>
+          <li><span>51 to 100 patients</span><b>$79</b></li>
+          <li><span>101 to 200 patients</span><b>$119</b></li>
+          <li><span>More than 200 patients</span><b>$159</b></li>
+        </ul>
+        <p>Per pharmacy, in Canadian dollars. Includes your whole team, setup and training. Nothing to pay during your free month, and no commitment.</p>
       </div>
 
       <div class="apply" id="apply">
