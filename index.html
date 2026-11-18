@@ -22,7 +22,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#F7F7F5; --surface:#FFFFFF; --ink:#18181A; --muted:#66666D; --faint:#B9B9BE; --line:#E2E2DE;
+    --bg:#F7F7F5; --surface:#FFFFFF; --ink:#18181A; --muted:#66666D; --faint:#B9B9BE; --unlit:#8A8A91; --line:#E2E2DE;
     --accent:#1F5FAD; --soft:#EDF2F9; --pocket:#F1F1EF; --ok:#1E7A46; --ok-soft:#E7F3EC;
     --warn:#9A5B00; --warn-soft:#FBF0DC; --err:#B3261E; --err-soft:#FBE9E7;
     --f-body:"Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, system-ui, sans-serif;
@@ -31,7 +31,7 @@
     --ease:cubic-bezier(.2,.7,.2,1);
   }
   @media (prefers-color-scheme: dark){:root{
-    --bg:#111113; --surface:#18181B; --ink:#EDEDEF; --muted:#9C9CA4; --faint:#4A4A52; --line:#2B2B30;
+    --bg:#111113; --surface:#18181B; --ink:#EDEDEF; --muted:#9C9CA4; --faint:#4A4A52; --unlit:#6E6E76; --line:#2B2B30;
     --accent:#82B2F2; --soft:#1A2433; --pocket:#212125; --ok:#6FCF97; --ok-soft:#14261C;
     --warn:#F2C14E; --warn-soft:#2A2214; --err:#F2857C; --err-soft:#2E1716; color-scheme:dark}}
 
@@ -116,17 +116,17 @@
   /* Statement: words light up as you scroll */
   .statement{padding:160px 0}
   .statement p{font:600 clamp(30px,3.8vw,52px)/1.15 var(--f-display); letter-spacing:-.03em; max-width:26ch; margin:0 auto; text-align:center}
-  .statement .w{color:var(--faint); transition:color .35s}
+  .statement .w{color:var(--unlit); transition:color .35s}
   .statement .w.on{color:var(--ink)}
   .statement .w.on.hl{color:var(--accent)}
 
-  /* How it works: the four steps, all visible */
+  /* How it works: pinned on desktop while the pack moves through its four steps */
   #how{padding:0}
-  .story{position:relative; height:420vh}
+  .story{position:relative; height:260vh}
   .story .pin{position:sticky; top:60px; height:calc(100vh - 60px); display:grid; grid-template-columns:.9fr 1.1fr; gap:72px; align-items:center}
   .story .intro h2{margin-bottom:40px}
   .story ol{list-style:none; padding:0; margin:0; display:grid; gap:4px}
-  .story li{padding:16px 0 16px 22px; border-left:2px solid var(--line); transition:border-color .4s, opacity .4s; opacity:.4}
+  .story li{padding:16px 0 16px 22px; border-left:2px solid var(--line); transition:border-color .4s, opacity .4s; opacity:.6}
   .story li.on{border-left-color:var(--accent); opacity:1}
   .story li .n{font:500 12px var(--f-mono); color:var(--accent); letter-spacing:.06em}
   .story li p{color:var(--muted); margin-top:6px; max-width:30em; display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s var(--ease)}
@@ -301,7 +301,7 @@
     <p class="lead">Blisterwise shows who's due, what's filled, what's checked and what's gone out, for every compliance pack in your pharmacy.</p>
     <div class="actions">
       <a class="btn" href="#apply">Book a 20-minute demo <span class="arr">→</span></a>
-      <a class="link" href="#try">Try the bottle scan ↓</a>
+      <a class="link" href="#how">See how it works ↓</a>
     </div>
 
     <figure class="board" aria-label="Sample data: the next 7 days of packs in Blisterwise, each moving from due to filled, checked and picked up (made-up patients)" style="margin-bottom:0">
@@ -314,6 +314,29 @@
 
   <section class="statement" aria-label="Why Blisterwise">
     <div class="wrap"><p id="statement">Most pharmacies track packs with binders, whiteboards and memory. Blisterwise puts every pack in one list your whole team can trust.</p></div>
+  </section>
+
+  <section id="how">
+    <div class="story" id="story">
+      <div class="pin wrap">
+        <div class="intro">
+          <span class="label">How it works</span>
+          <h2>One pack, four steps.</h2>
+          <ol id="story-steps">
+            <li><span class="n">01 · DUE</span><h3>Know who's due</h3><p><span>Every patient's next pack, with prep dates worked out for weekly, two-week and monthly cycles. Start a new patient from a photo of their grid: staff check each line before it's saved.</span></p></li>
+            <li><span class="n">02 · FILL</span><h3>Fill by scanning</h3><p><span>Scan each bottle. Blisterwise checks it against the patient's medication list, stops the wrong drug, strength or form, and records the lot and expiry.</span></p></li>
+            <li><span class="n">03 · CHECK</span><h3>A second person checks</h3><p><span>A pharmacist checks the pack with their own PIN. If they made it themselves, they have to give a reason, and it's logged.</span></p></li>
+            <li><span class="n">04 · HAND OFF</span><h3>Hand off and roll forward</h3><p><span>Record pickup or delivery. The next due date moves forward on its own, and every step is logged.</span></p></li>
+          </ol>
+        </div>
+        <figure class="pack" id="story-pack" aria-label="Example weekly pack for a made-up patient" style="margin:0">
+          <div class="top"><b>Margaret L. · Weekly pack</b><span>WEEK OF NOV 16</span></div>
+          <div class="grid" id="pack" aria-hidden="true"></div>
+          <div class="status" aria-live="polite"><span class="dot"></span><span id="story-status">Due Thursday · prep Tuesday</span></div>
+          <div class="stamp" aria-hidden="true">Picked up<small>Next pack due Nov 26</small></div>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section id="try">
@@ -338,29 +361,6 @@
           <div class="barcode" aria-hidden="true"></div>
           <div class="result" id="scan-result" role="status" aria-live="polite"><b>Ready to scan</b><span>Pick a bottle to scan it.</span></div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="how">
-    <div class="story" id="story">
-      <div class="pin wrap">
-        <div class="intro">
-          <span class="label">How it works</span>
-          <h2>One pack, four steps.</h2>
-          <ol id="story-steps">
-            <li><span class="n">01 · DUE</span><h3>Know who's due</h3><p><span>Every patient's next pack, with prep dates worked out for weekly, two-week and monthly cycles. Start a new patient from a photo of their grid: staff check each line before it's saved.</span></p></li>
-            <li><span class="n">02 · FILL</span><h3>Fill by scanning</h3><p><span>Scan each bottle. Blisterwise checks it against the patient's medication list, stops the wrong drug, strength or form, and records the lot and expiry.</span></p></li>
-            <li><span class="n">03 · CHECK</span><h3>A second person checks</h3><p><span>A pharmacist checks the pack with their own PIN. If they made it themselves, they have to give a reason, and it's logged.</span></p></li>
-            <li><span class="n">04 · HAND OFF</span><h3>Hand off and roll forward</h3><p><span>Record pickup or delivery. The next due date moves forward on its own, and every step is logged.</span></p></li>
-          </ol>
-        </div>
-        <figure class="pack" id="story-pack" aria-label="Example weekly pack for a made-up patient" style="margin:0">
-          <div class="top"><b>Margaret L. · Weekly pack</b><span>WEEK OF NOV 16</span></div>
-          <div class="grid" id="pack" aria-hidden="true"></div>
-          <div class="status" aria-live="polite"><span class="dot"></span><span id="story-status">Due Thursday · prep Tuesday</span></div>
-          <div class="stamp" aria-hidden="true">Picked up<small>Next pack due Nov 26</small></div>
-        </figure>
       </div>
     </div>
   </section>
@@ -403,7 +403,7 @@
           </div>
         </div>
       </div>
-      <p class="hint">PLANNED · EXAMPLE SCREENS</p></div>
+      <p class="hint">PLANNED · EXAMPLE SCREENS · SCROLL INSIDE THE PHONE</p></div>
     </div>
   </section>
 
@@ -493,13 +493,11 @@
   }
   rows.forEach(paint);
   if (!reduce) {
-    // One pass: each pack moves forward one step, then the board stays still.
     let turn = 0;
-    const timer = setInterval(() => {
+    setInterval(() => {
       if (document.hidden) return;
-      if (turn >= 5) return clearInterval(timer);
-      const row = rows[[1, 2, 0, 3, 4][turn++]];
-      row.stage = Math.min(row.stage + 1, STAGES.length - 1);
+      const row = rows[[1, 2, 0, 3, 4][turn++ % 5]];
+      row.stage = (row.stage + 1) % STAGES.length;
       paint(row);
       row.el.classList.remove("flash"); void row.el.offsetWidth; row.el.classList.add("flash");
     }, 2200);
@@ -512,7 +510,7 @@
   const words = [...st.querySelectorAll(".w")];
   function lightWords(){
     const r = st.getBoundingClientRect(), vh = innerHeight;
-    const p = 1;
+    const p = reduce ? 1 : Math.min(1, Math.max(0, (vh * .85 - r.top) / (r.height + vh * .35)));
     const n = Math.round(p * words.length);
     words.forEach((w, i) => w.classList.toggle("on", i < n));
   }
@@ -551,13 +549,21 @@
     const p = Math.min(.999, Math.max(0, -r.top / span));
     setStep(Math.floor(p * 4));
   }
-  story.classList.add("static"); setStep(3);
+  const pinMQ = matchMedia("(min-width:901px)");
+  function layoutStory(){
+    const pinned = pinMQ.matches && !reduce;
+    story.classList.toggle("static", !pinned);
+    shown = -1;
+    if (pinned) storyScroll(); else setStep(3);
+  }
+  layoutStory(); pinMQ.addEventListener("change", layoutStory);
 
   let ticking = false;
   addEventListener("scroll", () => {
     if (ticking) return; ticking = true;
-    requestAnimationFrame(() => { ticking = false; lightWords(); });
+    requestAnimationFrame(() => { ticking = false; lightWords(); if (!story.classList.contains("static")) storyScroll(); });
   }, {passive: true});
+  addEventListener("resize", () => { lightWords(); if (!story.classList.contains("static")) storyScroll(); });
   lightWords();
 
   // ---- Try it: scanning a bottle.
@@ -579,6 +585,29 @@
     screen.classList.remove("scanning"); void screen.offsetWidth; screen.classList.add("scanning");
     scanTimer = setTimeout(() => screen.classList.remove("scanning"), 700);
   }));
+
+
+  // ---- Patient app phone: drifts on its own; pauses while someone scrolls, hovers or touches it.
+  (() => {
+    const vp = document.querySelector(".viewport"), feed = vp.querySelector(".feed");
+    vp.append(Object.assign(feed.cloneNode(true), {ariaHidden: "true"}));  // a second copy makes the loop seamless
+    if (reduce) return;
+    let pausedUntil = 0, last = 0, pos = 0, hovering = false;
+    const pause = () => { pausedUntil = performance.now() + 4000; };
+    ["wheel", "touchstart", "pointerdown", "keydown"].forEach(ev => vp.addEventListener(ev, pause, {passive: true}));
+    vp.addEventListener("pointerenter", () => hovering = true);
+    vp.addEventListener("pointerleave", () => { hovering = false; pause(); });
+    (function step(t){
+      const dt = last ? Math.min(t - last, 50) : 0; last = t;
+      if (!hovering && t > pausedUntil && !document.hidden) {
+        if (Math.abs(vp.scrollTop - pos) > 2) pos = vp.scrollTop;
+        pos += dt * 0.022;
+        if (pos >= feed.offsetHeight) pos -= feed.offsetHeight;
+        vp.scrollTop = pos;
+      } else pos = vp.scrollTop;
+      requestAnimationFrame(step);
+    })(0);
+  })();
 
 
   // ---- Free trial requests: saved to the "Blisterwise pilot sign-ups" sheet by a Google Apps Script
