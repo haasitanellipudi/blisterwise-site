@@ -61,6 +61,8 @@
   .brand svg{width:38px; height:38px}
   nav{display:flex; align-items:center; gap:28px; font-size:14px}
   nav a{text-decoration:none; color:var(--muted); transition:color .15s} nav a:hover{color:var(--ink)}
+  nav a.login{display:inline-flex; align-items:center; min-height:44px; padding:0 16px; border:1px solid var(--line); border-radius:999px; color:var(--ink); font-weight:500}
+  nav a.login:hover{border-color:var(--ink)}
 
   .btn{display:inline-flex; align-items:center; gap:10px; background:var(--ink); color:var(--bg)!important; font:500 16px var(--f-body);
        text-decoration:none; padding:14px 22px; border-radius:999px; border:0; cursor:pointer; transition:transform .2s var(--ease), opacity .15s}
@@ -276,7 +278,7 @@
   }
   @media (max-width:640px){
     body{font-size:16px}
-    nav a:not(.btn){display:none}
+    nav a:not(.btn):not(.login){display:none} nav{gap:6px} nav a{white-space:nowrap; font-size:13px} nav a.login{padding:0 12px} nav .btn.small{padding:8px 12px; font-size:13px} header .wrap{gap:8px}
     .brand{font-size:21px} .brand svg{width:32px; height:32px}
     .board{border-radius:14px 14px 0 0}
     .rows{padding:4px 4px 10px} .r{gap:8px; padding:11px 8px; font-size:14px}
@@ -298,7 +300,8 @@
     </a>
     <nav aria-label="Main">
       <a href="#how">How it works</a>
-            <a href="#pricing">Pricing</a>
+      <a href="#pricing">Pricing</a>
+      <a class="login" href="https://app.blisterwise.ca">Log in</a>
       <a class="btn small" href="#apply">Book a demo</a>
     </nav>
   </div>
